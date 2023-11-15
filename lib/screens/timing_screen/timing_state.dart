@@ -10,24 +10,32 @@ part of 'timing_cubit.dart';
 // class TimingInitial extends TimingState {}
 
 class TimingState {
-  int seconds;
+  int trainingTime;
+  int restTime;
   bool isRunning;
   int currentRound;
+  bool isResting;
 
   TimingState({
-    this.seconds = 0,
+    this.trainingTime = 300,
     this.isRunning = false,
     this.currentRound = 1,
+    this.restTime = 30,
+    this.isResting = false,
   });
   TimingState copyWith({
-    int? seconds,
+    int? trainingTime,
     bool? isRunning,
     int? currentRound,
+    int? restTime,
+    bool? isResting,
   }) {
     return TimingState(
-      seconds: seconds ?? this.seconds,
+      restTime: restTime ?? this.restTime,
+      trainingTime: trainingTime ?? this.trainingTime,
       isRunning: isRunning ?? this.isRunning,
       currentRound: currentRound ?? this.currentRound,
+      isResting: isResting ?? this.isResting,
     );
   }
 }

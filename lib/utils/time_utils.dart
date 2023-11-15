@@ -4,7 +4,9 @@ class TimeUtils {
   }
 
   static String getMinute(Duration duration) {
-    return duration.inMinutes > 0 ? '${duration.inMinutes.remainder(60)}:' : '';
+    return duration.inMinutes > 0
+        ? '${duration.inMinutes.remainder(60).toString().padLeft(2, '0')}:'
+        : '';
   }
 
   static String getSecondDisplay(Duration duration) {

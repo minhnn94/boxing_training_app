@@ -30,27 +30,6 @@ class _TimingScreenState extends State<TimingScreen> {
     );
   }
 
-  void _handleOnPressClickStartButton() {
-    if (_timer != null && _timer!.isActive) {
-      _pauseTimer();
-    } else {
-      _startTimer();
-    }
-  }
-
-  void _startTimer() {
-    _playSound();
-    const oneSec = Duration(seconds: 1);
-    _timer = Timer.periodic(
-      oneSec,
-      _changeTimer,
-    );
-  }
-
-  void _pauseTimer() {
-    _timer?.cancel();
-  }
-
   void _changeTimer(Timer timer) {
     if (_start == 0) {
       setState(() {
@@ -107,10 +86,10 @@ class _TimingScreenState extends State<TimingScreen> {
                 child: Center(
                   child: BlocBuilder<TimingCubit, TimingState>(
                     buildWhen: (previous, current) =>
-                        previous.seconds != current.seconds,
+                        previous.trainingTime != current.trainingTime,
                     builder: (context, state) {
                       return Text(
-                        getTimeDisplay(state.seconds),
+                        getTimeDisplay(state.trainingTime),
                         style: const TextStyle(
                             fontSize: 40,
                             fontWeight: FontWeight.w600,
@@ -120,21 +99,29 @@ class _TimingScreenState extends State<TimingScreen> {
                   ),
                 ),
               ),
+              Text('$_start'),
               SIZED_H32,
               Center(
                 child: InkWell(
-                  onTap: _handleOnPressClickStartButton,
+                  onTap: context.read<TimingCubit>().handleOnPressButtonProcess,
                   child: Container(
                     width: double.infinity,
                     color: Colors.blueAccent,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 32, vertical: 12),
-                    child: const Text('Start',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white)),
+                    child: BlocSelector<TimingCubit, TimingState, bool>(
+                      selector: (state) {
+                        return state.isRunning;
+                      },
+                      builder: (context, state) {
+                        return Text(state ? 'Pause' : 'Start',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white));
+                      },
+                    ),
                   ),
                 ),
               ),
