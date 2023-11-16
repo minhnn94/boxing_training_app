@@ -1,4 +1,5 @@
 import 'package:boxing_traning/common/global/global_key.dart';
+import 'package:boxing_traning/models/martial_art_model.dart';
 import 'package:boxing_traning/routers/router_name.dart';
 import 'package:boxing_traning/screens/home_screen/home_screen.dart';
 import 'package:boxing_traning/screens/setup_screen/setup_screen.dart';
@@ -21,9 +22,12 @@ final GoRouter routerManage = GoRouter(
         path: RouterPath.timingScreen,
         name: RouterPath.timingScreen,
         builder: (BuildContext context, GoRouterState state) {
+          final martialArtModel = state.extra;
+
           return BlocProvider(
-            create: (context) => TimingCubit(),
-            child: const TimingScreen(),
+            create: (context) =>
+                TimingCubit(martialArtModel as MartialArtModel),
+            child: TimingScreen(),
           );
         }),
     GoRoute(

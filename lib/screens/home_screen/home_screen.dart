@@ -1,6 +1,9 @@
 import 'package:boxing_traning/common/app_localization_utils.dart';
 import 'package:boxing_traning/common/enum/martial_art_enum.dart';
 import 'package:boxing_traning/models/martial_art_model.dart';
+import 'package:boxing_traning/models/prepare_model.dart';
+import 'package:boxing_traning/models/resting_model.dart';
+import 'package:boxing_traning/models/training_model.dart';
 import 'package:boxing_traning/routers/router_name.dart';
 import 'package:boxing_traning/shared_widgets/base_scaffold.dart';
 import 'package:flutter/material.dart';
@@ -15,12 +18,23 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final martialArtData = [
-    MartialArtModel(martialArtEnum: MartialArtEnum.boxing, id: '1'),
-    MartialArtModel(martialArtEnum: MartialArtEnum.kickboxing, id: '2'),
-    MartialArtModel(martialArtEnum: MartialArtEnum.mma, id: '3'),
-    MartialArtModel(martialArtEnum: MartialArtEnum.karate, id: '4'),
-    MartialArtModel(martialArtEnum: MartialArtEnum.jiujitsu, id: '5'),
-    MartialArtModel(martialArtEnum: MartialArtEnum.createLesson, id: '6'),
+    // MartialArtModel(martialArtEnum: MartialArtEnum.boxing, id: '1'),
+    // MartialArtModel(martialArtEnum: MartialArtEnum.kickboxing, id: '2'),
+    MartialArtModel(
+      martialArtEnum: MartialArtEnum.mma,
+      id: '3',
+      prepareModel: PrepareModel(prepareTime: 10),
+      restingModel: RestingModel(restingTime: 60, reminderTime: 10),
+      trainingModel: TrainingModel(
+        roundTotal: 5,
+        trainingTime: 60,
+        reminderFinishTime: 10,
+        reminderTime: 0,
+      ),
+    ),
+    // MartialArtModel(martialArtEnum: MartialArtEnum.karate, id: '4'),
+    // MartialArtModel(martialArtEnum: MartialArtEnum.jiujitsu, id: '5'),
+    // MartialArtModel(martialArtEnum: MartialArtEnum.createLesson, id: '6'),
   ];
 
   @override
@@ -73,7 +87,7 @@ class _MartialArtItem extends StatelessWidget {
   }
 
   void _handleOnPressItem(BuildContext context) {
-    context.pushNamed(RouterPath.timingScreen);
+    context.pushNamed(RouterPath.timingScreen, extra: martialArtModel);
   }
 
   @override

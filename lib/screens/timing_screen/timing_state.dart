@@ -14,28 +14,31 @@ class TimingState {
   int restTime;
   bool isRunning;
   int currentRound;
-  bool isResting;
+  int roundTotal;
+  ExerciseStatus exerciseStatus;
 
   TimingState({
-    this.trainingTime = 300,
+    this.trainingTime = 10,
     this.isRunning = false,
     this.currentRound = 1,
-    this.restTime = 30,
-    this.isResting = false,
+    this.restTime = 5,
+    this.roundTotal = 5,
+    this.exerciseStatus = ExerciseStatus.prepare,
   });
-  TimingState copyWith({
-    int? trainingTime,
-    bool? isRunning,
-    int? currentRound,
-    int? restTime,
-    bool? isResting,
-  }) {
+  TimingState copyWith(
+      {int? trainingTime,
+      bool? isRunning,
+      int? currentRound,
+      int? restTime,
+      int? roundTotal,
+      ExerciseStatus? exerciseStatus}) {
     return TimingState(
       restTime: restTime ?? this.restTime,
       trainingTime: trainingTime ?? this.trainingTime,
       isRunning: isRunning ?? this.isRunning,
       currentRound: currentRound ?? this.currentRound,
-      isResting: isResting ?? this.isResting,
+      roundTotal: roundTotal ?? this.roundTotal,
+      exerciseStatus: exerciseStatus ?? this.exerciseStatus,
     );
   }
 }
