@@ -19,10 +19,12 @@ class TimingCubit extends Cubit<TimingState> {
     final trainingTime = martialArtModel.trainingModel.trainingTime;
     final restingTime = martialArtModel.restingModel.restingTime;
     final roundTotal = martialArtModel.trainingModel.roundTotal;
+    final reminderFinishTime = martialArtModel.trainingModel.reminderFinishTime;
     emit(state.copyWith(
       restTime: restingTime,
       trainingTime: trainingTime,
       roundTotal: roundTotal,
+      reminderFinishTime: reminderFinishTime,
     ));
   }
 
@@ -57,6 +59,9 @@ class TimingCubit extends Cubit<TimingState> {
       _handleWhenFinishRound();
     } else {
       final timing = state.trainingTime - 1;
+      if (timing == state.reminderFinishTime) {
+        SoundPlay().playReminderSound();
+      }
       emit(state.copyWith(
         trainingTime: timing,
       ));
@@ -116,4 +121,10 @@ class TimingCubit extends Cubit<TimingState> {
   }
 
   void onDispose() {}
+  @override
+  Future<void> close() {
+    _restingTimer?.cancel();
+    _trainingTimer?.cancel();
+    return super.close();
+  }
 }

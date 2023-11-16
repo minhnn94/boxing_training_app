@@ -13,16 +13,34 @@ typedef TimingSelector<T> = BlocSelector<TimingCubit, TimingState, T>;
 class TimingScreen extends StatelessWidget {
   const TimingScreen({super.key});
 
+  Color getAppBarColor(bool isRunning) {
+    if (isRunning) {
+      return ColorUtils.trainingColor;
+    } else {
+      return ColorUtils.restingColor;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
-        appBar: AppBar(
-          backgroundColor: ColorUtils.trainingColor,
-          leading: InkWell(
-            onTap: context.pop,
-            child: const Icon(Icons.arrow_back_rounded),
+        appBar: PreferredSize(
+          preferredSize: const Size(double.infinity, 60),
+          child: TimingSelector<bool>(
+            selector: (state) {
+              return state.isRunning;
+            },
+            builder: (context, state) {
+              return AppBar(
+                backgroundColor: getAppBarColor(state),
+                leading: InkWell(
+                  onTap: context.pop,
+                  child: const Icon(Icons.arrow_back_rounded),
+                ),
+                title: const Text('Timing Screen'),
+              );
+            },
           ),
-          title: const Text('Timing Screen'),
         ),
         body: Padding(
           padding: PAD_H16,
@@ -51,24 +69,31 @@ class TimingScreen extends StatelessWidget {
               Center(
                 child: InkWell(
                   onTap: context.read<TimingCubit>().handleOnPressButtonProcess,
-                  child: Container(
-                    width: double.infinity,
-                    color: ColorUtils.trainingColor,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 32, vertical: 12),
-                    child: BlocSelector<TimingCubit, TimingState, bool>(
-                      selector: (state) {
-                        return state.isRunning;
-                      },
-                      builder: (context, state) {
-                        return Text(state ? 'Pause' : 'Start',
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white));
-                      },
-                    ),
+                  child: TimingSelector<bool>(
+                    selector: (state) {
+                      return state.isRunning;
+                    },
+                    builder: (context, state) {
+                      return Container(
+                        width: double.infinity,
+                        color: getAppBarColor(state),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 32, vertical: 12),
+                        child: BlocSelector<TimingCubit, TimingState, bool>(
+                          selector: (state) {
+                            return state.isRunning;
+                          },
+                          builder: (context, state) {
+                            return Text(state ? 'Pause' : 'Start',
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white));
+                          },
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),

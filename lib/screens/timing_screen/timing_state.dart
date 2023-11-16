@@ -16,6 +16,7 @@ class TimingState {
   int currentRound;
   int roundTotal;
   ExerciseStatus exerciseStatus;
+  int reminderFinishTime;
 
   TimingState({
     this.trainingTime = 10,
@@ -24,14 +25,17 @@ class TimingState {
     this.restTime = 5,
     this.roundTotal = 5,
     this.exerciseStatus = ExerciseStatus.prepare,
+    this.reminderFinishTime = 30,
   });
-  TimingState copyWith(
-      {int? trainingTime,
-      bool? isRunning,
-      int? currentRound,
-      int? restTime,
-      int? roundTotal,
-      ExerciseStatus? exerciseStatus}) {
+  TimingState copyWith({
+    int? trainingTime,
+    bool? isRunning,
+    int? currentRound,
+    int? restTime,
+    int? roundTotal,
+    ExerciseStatus? exerciseStatus,
+    int? reminderFinishTime,
+  }) {
     return TimingState(
       restTime: restTime ?? this.restTime,
       trainingTime: trainingTime ?? this.trainingTime,
@@ -39,6 +43,7 @@ class TimingState {
       currentRound: currentRound ?? this.currentRound,
       roundTotal: roundTotal ?? this.roundTotal,
       exerciseStatus: exerciseStatus ?? this.exerciseStatus,
+      reminderFinishTime: reminderFinishTime ?? this.reminderFinishTime,
     );
   }
 }

@@ -15,6 +15,12 @@ class SoundPlay {
     );
   }
 
+  void playReminderSound() {
+    assetsAudioPlayer.open(
+      Audio(MusicPath.reminderBell),
+    );
+  }
+
   void startBoxingBelt() {
     assetsAudioPlayer.open(
       Audio(MusicPath.boxingBelt),
