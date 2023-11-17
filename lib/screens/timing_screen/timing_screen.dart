@@ -1,5 +1,6 @@
 import 'package:boxing_traning/common/constant/padding_constant.dart';
 import 'package:boxing_traning/common/constant/sized_box_constant.dart';
+import 'package:boxing_traning/routers/router_name.dart';
 import 'package:boxing_traning/screens/timing_screen/timing_cubit.dart';
 import 'package:boxing_traning/screens/timing_screen/widgets/render_time_component.dart';
 import 'package:boxing_traning/shared_widgets/base_scaffold.dart';
@@ -38,6 +39,17 @@ class TimingScreen extends StatelessWidget {
                   child: const Icon(Icons.arrow_back_rounded),
                 ),
                 title: const Text('Timing Screen'),
+                actions: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.settings,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      context.pushNamed(RouterPath.setupScreen);
+                    },
+                  )
+                ],
               );
             },
           ),

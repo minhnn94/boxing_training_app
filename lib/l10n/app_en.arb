@@ -20,5 +20,13 @@
     }
   },
   "competitionTime": "Competition time",
-  "breakTime": "Break time"
+  "breakTime": "Break time",
+  "roundTime": "Round time",
+  "totalRounds": "Total Rounds",
+  "prepareTime": "Prepare Time",
+  "setting": "Setting",
+  "minutes": "Minutes",
+  "seconds": "Seconds",
+  "done": "Done",
+  "cancel": "Cancel"
 }
