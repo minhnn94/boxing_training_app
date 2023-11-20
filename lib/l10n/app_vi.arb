@@ -9,5 +9,7 @@
   "minutes": "Phút",
   "seconds": "Giây",
   "done": "Xong",
-  "cancel": "Hủy"
+  "cancel": "Hủy",
+  "start": "Bắt đầu",
+  "pause": "Tạm dừng"
 }

@@ -1,24 +1,37 @@
+import 'package:boxing_traning/common/color_utils.dart';
 import 'package:boxing_traning/common/constant/padding_constant.dart';
-import 'package:boxing_traning/shared_widgets/custom_time_picker.dart';
-import 'package:boxing_traning/utils/color_utils.dart';
+import 'package:boxing_traning/common/shared_widgets/custom_time_picker.dart';
+import 'package:boxing_traning/common/text_style_utils.dart';
+import 'package:boxing_traning/common/time_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SettingButton extends StatelessWidget {
-  const SettingButton(
-      {super.key, this.title = '', this.onPress, this.time = '', j});
-  final Function? onPress;
+  const SettingButton({
+    super.key,
+    this.title = '',
+    this.onPress,
+    this.time = 0,
+    this.onChangeTime,
+  });
+  final Function(int seconds)? onPress;
   final String title;
-  final String time;
-  void showIOSDatePicker(ctx) {
+  final int time;
+  final Function(int)? onChangeTime;
+  void showIOSTimePicker(ctx) {
     showCupertinoModalPopup(
-        context: ctx, builder: (_) => const TimePickerCustom());
+      context: ctx,
+      builder: (_) => TimePickerCustom(
+        totalSeconds: time,
+        callBack: onChangeTime,
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => showIOSDatePicker(context),
+      onTap: () => showIOSTimePicker(context),
       child: Container(
           width: double.infinity,
           padding: PAD_H16,
@@ -30,14 +43,16 @@ class SettingButton extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: ColorUtils.white,
-                ),
+                style: TextStyleUtils.text16Weight600
+                    .copyWith(color: ColorUtils.white),
               ),
               Row(
                 children: [
+                  Text(
+                    TimeUtils.getTimeDisplayLikeClock(Duration(seconds: time)),
+                    style: TextStyleUtils.text14Weight600
+                        .copyWith(color: ColorUtils.white),
+                  ),
                   InkWell(
                     child: Padding(
                       padding: const EdgeInsets.all(4),

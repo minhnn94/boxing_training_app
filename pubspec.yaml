@@ -43,6 +43,7 @@ dependencies:
   assets_audio_player: ^3.0.8
   percent_indicator: ^4.2.3
   equatable: ^2.0.4
+  textfield_have_range_button: ^1.0.1+1
 #  firebase_core: ^2.21.0
 #  cloud_firestore: ^4.12.2
 #  loader_overlay: ^2.0.10

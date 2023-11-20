@@ -18,7 +18,7 @@ class TimingCubit extends Cubit<TimingState> {
   void _initState() {
     final trainingTime = martialArtModel.trainingModel.trainingTime;
     final restingTime = martialArtModel.restingModel.restingTime;
-    final roundTotal = martialArtModel.trainingModel.roundTotal;
+    final roundTotal = martialArtModel.trainingModel.totalRounds;
     final reminderFinishTime = martialArtModel.trainingModel.reminderFinishTime;
     emit(state.copyWith(
       restTime: restingTime,

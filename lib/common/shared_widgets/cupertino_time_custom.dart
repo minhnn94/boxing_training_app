@@ -19,7 +19,7 @@ class CupertinoTimeCustom extends StatelessWidget {
       itemExtent: _kItemExtent,
       // This sets the initial item.
       scrollController: FixedExtentScrollController(
-        initialItem: 0,
+        initialItem: initialValue,
       ),
       // This is called when selected item is changed.
       onSelectedItemChanged: onSelectedItemChanged,

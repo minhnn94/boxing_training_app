@@ -666,6 +666,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.16"
+  textfield_have_range_button:
+    dependency: "direct main"
+    description:
+      name: textfield_have_range_button
+      sha256: f790ec4ee941e33120c279354919310a6ed99101c3ae0d20e06535dbc73801e4
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1+1"
+  textfield_pattern_formatter:
+    dependency: transitive
+    description:
+      name: textfield_pattern_formatter
+      sha256: d38ce1c0196c697f0ddf3d1cf7200ec0e26b87643cded38c1cf4dc65fcead0a5
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.3"
   time:
     dependency: transitive
     description:

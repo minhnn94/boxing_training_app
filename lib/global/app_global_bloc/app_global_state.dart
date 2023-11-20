@@ -1,12 +1,12 @@
 part of 'app_global_cubit.dart';
 
 class AppGlobalState {
-  List<MartialArtModel>? martialArts;
+  List<MartialTemplate>? martialArts;
   MartialArtModel? martialArtSelected;
 
   AppGlobalState({this.martialArts, this.martialArtSelected});
   AppGlobalState copyWith({
-    List<MartialArtModel>? martialArts,
+    List<MartialTemplate>? martialArts,
     MartialArtModel? martialArtSelected,
   }) {
     return AppGlobalState(

@@ -1,13 +1,10 @@
-import 'package:boxing_traning/common/app_localization_utils.dart';
+import 'package:boxing_traning/common/color_utils.dart';
 import 'package:boxing_traning/common/enum/martial_art_enum.dart';
+import 'package:boxing_traning/common/shared_widgets/base_scaffold.dart';
+import 'package:boxing_traning/common/text_style_utils.dart';
 import 'package:boxing_traning/global/app_global_bloc/app_global_cubit.dart';
-import 'package:boxing_traning/models/martial_art_model.dart';
-import 'package:boxing_traning/models/prepare_model.dart';
-import 'package:boxing_traning/models/resting_model.dart';
-import 'package:boxing_traning/models/training_model.dart';
+import 'package:boxing_traning/models/martial_template.dart';
 import 'package:boxing_traning/routers/router_name.dart';
-import 'package:boxing_traning/shared_widgets/base_scaffold.dart';
-import 'package:boxing_traning/utils/color_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -20,18 +17,27 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final mixMartialArt = MartialArtModel(
-    martialArtEnum: MartialArtEnum.mma,
-    id: '3',
-    prepareModel: PrepareModel(prepareTime: 10),
-    restingModel: RestingModel(restingTime: 60, reminderTime: 10),
-    trainingModel: TrainingModel(
-      roundTotal: 5,
-      trainingTime: 60,
-      reminderFinishTime: 10,
-      reminderTime: 0,
-    ),
+  final mixMartialArt = MartialTemplate(
+    id: '1',
+    name: 'MMA',
+    breakTime: 10,
+    prepareTime: 5,
+    roundTime: 60,
+    totalRounds: 5,
   );
+
+  // final mixMartialArt = MartialArtModel(
+  //   martialArtEnum: MartialArtEnum.mma,
+  //   id: '3',
+  //   prepareModel: PrepareModel(prepareTime: 10),
+  //   restingModel: RestingModel(restingTime: 60, reminderTime: 10),
+  //   trainingModel: TrainingModel(
+  //     totalRounds: 5,
+  //     trainingTime: 60,
+  //     reminderFinishTime: 10,
+  //     reminderTime: 0,
+  //   ),
+  // );
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +50,6 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Text(AppLocalizationUtils.instance().helloWorld('John')),
-            Text(AppLocalizationUtils.instance().nWombats(0)),
             InkWell(
               onTap: () {
                 context.read<AppGlobalCubit>().addNewMartialArt(mixMartialArt);
@@ -55,17 +59,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 decoration: BoxDecoration(
                     color: ColorUtils.primary,
                     borderRadius: BorderRadius.circular(15)),
-                child: const Text(
+                child: Text(
                   'Add MMA',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white),
+                  style: TextStyleUtils.text16Weight600
+                      .copyWith(color: ColorUtils.white),
                 ),
               ),
             ),
             BlocSelector<AppGlobalCubit, AppGlobalState,
-                List<MartialArtModel>?>(
+                List<MartialTemplate>?>(
               selector: (state) {
                 return state.martialArts;
               },
@@ -102,7 +104,7 @@ class _MartialArtItem extends StatelessWidget {
     required this.martialArtModel,
   });
 
-  final MartialArtModel martialArtModel;
+  final MartialTemplate martialArtModel;
 
   String getNameDisplay(MartialArtEnum martialArtEnum) {
     if (martialArtEnum != MartialArtEnum.createLesson) {
@@ -113,7 +115,8 @@ class _MartialArtItem extends StatelessWidget {
   }
 
   void _handleOnPressItem(BuildContext context) {
-    context.pushNamed(RouterPath.timingScreen, extra: martialArtModel);
+    // context.pushNamed(RouterPath.timingScreen, extra: martialArtModel);
+    context.pushNamed(RouterPath.martialDetail, extra: martialArtModel);
   }
 
   @override
@@ -125,7 +128,7 @@ class _MartialArtItem extends StatelessWidget {
         decoration: BoxDecoration(
             color: ColorUtils.primary, borderRadius: BorderRadius.circular(15)),
         child: Text(
-          getNameDisplay(martialArtModel.martialArtEnum),
+          martialArtModel.name ?? '',
           style: const TextStyle(
               fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white),
         ),

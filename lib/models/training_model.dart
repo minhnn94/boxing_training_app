@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 class TrainingModel {
-  int roundTotal;
+  int totalRounds;
   int trainingTime;
   String? soundPath;
   Color? color;
@@ -11,7 +11,7 @@ class TrainingModel {
   String? reminderSoundPath;
 
   TrainingModel({
-    required this.roundTotal,
+    required this.totalRounds,
     required this.trainingTime,
     this.soundPath,
     this.color,

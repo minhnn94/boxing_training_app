@@ -1,7 +1,7 @@
+import 'package:boxing_traning/common/color_utils.dart';
+import 'package:boxing_traning/common/time_utils.dart';
 import 'package:boxing_traning/screens/timing_screen/timing_cubit.dart';
 import 'package:boxing_traning/screens/timing_screen/timing_screen.dart';
-import 'package:boxing_traning/utils/color_utils.dart';
-import 'package:boxing_traning/utils/time_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/percent_indicator.dart';

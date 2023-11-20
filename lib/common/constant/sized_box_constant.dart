@@ -1,4 +1,4 @@
 import 'package:flutter/cupertino.dart';
 
-const SIZED_H16 = SizedBox(height: 16);
-const SIZED_H32 = SizedBox(height: 32);
+const sizedHeight16 = SizedBox(height: 16);
+const sizedHeight32 = SizedBox(height: 32);
