@@ -29,4 +29,14 @@ class SetupState {
       name: name ?? this.name,
     );
   }
+
+  bool _getEnableButtonConfirm() {
+    return (breakTime ?? 0) > 0 &&
+        (prepareTime ?? 0) > 0 &&
+        (roundTime ?? 0) > 0 &&
+        (totalRounds ?? 0) > 0 &&
+        (name ?? '').isNotEmpty;
+  }
+
+  bool get isEnableConfirm => _getEnableButtonConfirm();
 }

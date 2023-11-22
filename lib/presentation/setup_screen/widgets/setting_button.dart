@@ -1,4 +1,5 @@
 import 'package:boxing_traning/common/color_utils.dart';
+import 'package:boxing_traning/common/constant/gradient.dart';
 import 'package:boxing_traning/common/constant/padding_constant.dart';
 import 'package:boxing_traning/common/shared_widgets/custom_time_picker.dart';
 import 'package:boxing_traning/common/text_style_utils.dart';
@@ -36,7 +37,7 @@ class SettingButton extends StatelessWidget {
           width: double.infinity,
           padding: PAD_H16,
           decoration: const BoxDecoration(
-              color: ColorUtils.primary,
+              gradient: linearGradientCommon,
               borderRadius: BorderRadius.all(Radius.circular(8))),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

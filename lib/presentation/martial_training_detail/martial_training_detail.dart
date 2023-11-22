@@ -88,7 +88,7 @@ class _MartialTrainingDetailState extends State<MartialTrainingDetail> {
   Widget build(BuildContext context) {
     return BaseScaffold(
       appBar: AppBarCommon(
-        title: 'Martial Training Detail',
+        title: AppLocalizationUtils.instance().detail,
         actions: [
           IconButton(
             icon: const Icon(
@@ -153,7 +153,7 @@ class _MartialTrainingDetailState extends State<MartialTrainingDetail> {
                     ),
                   ),
                   CommonButton(
-                    title: localLanguage.roundTime,
+                    title: localLanguage.start,
                     onPress: () {
                       context.pushNamed(RouterPath.timingScreen,
                           extra: widget.martial);

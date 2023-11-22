@@ -26,14 +26,14 @@ class RowOfTime extends StatelessWidget {
           style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
-              color: ColorUtils.primary),
+              color: ColorUtils.white),
         ),
         Text(
           getTimeDisplay(totalSeconds),
           style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
-              color: ColorUtils.primary),
+              color: ColorUtils.white),
         ),
       ],
     );

@@ -111,7 +111,7 @@ class _TimePickerCustomState extends State<TimePickerCustom> {
                         ),
                         Text(
                           localLanguage.minutes,
-                          style: TextStyleUtils.text16Weight600,
+                          style: TextStyleUtils.text16Weight600Gradient,
                         ),
                       ],
                     ),
@@ -140,7 +140,7 @@ class _TimePickerCustomState extends State<TimePickerCustom> {
                         ),
                         Text(
                           localLanguage.seconds,
-                          style: TextStyleUtils.text16Weight600,
+                          style: TextStyleUtils.text16Weight600Gradient,
                         ),
                       ],
                     ),

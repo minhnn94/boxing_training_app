@@ -1,4 +1,5 @@
 import 'package:boxing_traning/common/color_utils.dart';
+import 'package:boxing_traning/common/constant/gradient.dart';
 import 'package:boxing_traning/common/time_utils.dart';
 import 'package:boxing_traning/presentation/timing_screen/timing_cubit.dart';
 import 'package:boxing_traning/presentation/timing_screen/timing_screen.dart';
@@ -19,13 +20,14 @@ class RestingTimerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TimingSelector<int>(
       selector: (state) {
-        return state.restTime;
+        return state.breakTime;
       },
       builder: (context, state) {
         final breakTime = context.read<TimingCubit>().martialArt.breakTime ?? 1;
         return Column(
           children: [
             CircularPercentIndicator(
+              linearGradient: breakGradient,
               radius: 150,
               lineWidth: 150,
               percent: state / breakTime,
@@ -37,7 +39,7 @@ class RestingTimerWidget extends StatelessWidget {
                   color: ColorUtils.white,
                 ),
               ),
-              progressColor: ColorUtils.restingColor,
+              // progressColor: ColorUtils.restingColor,
             ),
           ],
         );

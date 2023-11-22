@@ -1,8 +1,10 @@
 import 'package:boxing_traning/common/app_localization_utils.dart';
 import 'package:boxing_traning/common/color_utils.dart';
 import 'package:boxing_traning/common/constant/border_constant.dart';
+import 'package:boxing_traning/common/constant/gradient.dart';
 import 'package:boxing_traning/common/constant/padding_constant.dart';
 import 'package:boxing_traning/common/constant/sized_box_constant.dart';
+import 'package:boxing_traning/common/shared_widgets/appbar_common.dart';
 import 'package:boxing_traning/common/shared_widgets/base_scaffold.dart';
 import 'package:boxing_traning/common/shared_widgets/common_button.dart';
 import 'package:boxing_traning/common/text_style_utils.dart';
@@ -31,9 +33,21 @@ class SetupScreen extends StatelessWidget {
   const SetupScreen({super.key, required this.setupParams});
   final SetupScreenParams setupParams;
   Future<void> _handleOnPressDone(BuildContext context) async {
-    await context.read<SetupCubit>().handleOnPressDone(setupParams.setupType);
-    // context.read<AppGlobalCubit>().(martial);
-    context.pop();
+    context
+        .read<SetupCubit>()
+        .handleOnPressDone(setupParams.setupType)
+        .then((value) {
+      context.pop();
+    });
+  }
+
+  String getTitleAppBar() {
+    final setupType = setupParams.setupType;
+    if (setupType == SetupScreenType.edit) {
+      return AppLocalizationUtils.instance().editSport;
+    } else {
+      return AppLocalizationUtils.instance().createSport;
+    }
   }
 
   @override
@@ -42,27 +56,9 @@ class SetupScreen extends StatelessWidget {
     final cubit = context.read<SetupCubit>();
     final martial = setupParams.martial;
     return BaseScaffold(
-      appBar: PreferredSize(
-          preferredSize: const Size(double.infinity, 60),
-          child: AppBar(
-            backgroundColor: ColorUtils.trainingColor,
-            leading: InkWell(
-              onTap: context.pop,
-              child: const Icon(Icons.arrow_back_rounded),
-            ),
-            title: const Text('Setup Screen'),
-            actions: [
-              IconButton(
-                icon: const Icon(
-                  Icons.settings,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  // context.pushNamed(RouterPath.setupScreen);
-                },
-              )
-            ],
-          )),
+      appBar: AppBarCommon(
+        title: getTitleAppBar(),
+      ),
       body: Container(
         color: ColorUtils.lightPrimary,
         child: Padding(
@@ -120,7 +116,7 @@ class SetupScreen extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.only(left: 16),
                       decoration: const BoxDecoration(
-                        color: ColorUtils.primary,
+                        gradient: linearGradientCommon,
                         borderRadius: BorderConstant.borderRadiusAll08,
                       ),
                       child: Row(
@@ -142,6 +138,9 @@ class SetupScreen extends StatelessWidget {
                                   child: UpAndDownTextField(
                                 padding: EdgeInsets.zero,
                                 baseValue: "${state ?? 0}",
+                                decoration: const InputDecoration.collapsed(
+                                  hintText: '',
+                                ),
                                 onChanged: (value) =>
                                     cubit.handleOnPressChangeTotalRounds(
                                         value.toInt()),
@@ -154,9 +153,17 @@ class SetupScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              CommonButton(
-                title: localLanguage.done,
-                onPress: () => _handleOnPressDone(context),
+              BlocSelector<SetupCubit, SetupState, bool>(
+                selector: (state) {
+                  return state.isEnableConfirm;
+                },
+                builder: (context, state) {
+                  return CommonButton(
+                    disable: !state,
+                    title: localLanguage.done,
+                    onPress: () => _handleOnPressDone(context),
+                  );
+                },
               )
             ],
           ),

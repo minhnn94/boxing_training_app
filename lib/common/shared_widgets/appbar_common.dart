@@ -7,14 +7,20 @@ class AppBarCommon extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     required this.title,
     this.actions,
+    this.centerTitle = true,
   });
   final String title;
   final List<Widget>? actions;
+  final bool centerTitle;
   @override
   Widget build(BuildContext context) {
     return AppBar(
       title: Text(title),
-      backgroundColor: ColorUtils.trainingColor,
+      centerTitle: centerTitle,
+      backgroundColor: ColorUtils.primaryNew,
+      // flexibleSpace: Container(
+      //   decoration: BoxDecoration(gradient: linearGradientCommon),
+      // ),
       leading: InkWell(
         onTap: context.pop,
         child: const Icon(Icons.arrow_back_rounded),

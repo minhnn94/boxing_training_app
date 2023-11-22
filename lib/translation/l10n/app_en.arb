@@ -42,5 +42,12 @@
         "example": "Bob"
       }
     }
-  }
+  },
+  "detail": "Detail",
+  "choiceYourSport": "Choice your sport",
+  "editSport": "Edit Sport",
+  "createSport": "Create New Sport",
+  "resume": "Resume",
+  "round": "Round"
+
 }

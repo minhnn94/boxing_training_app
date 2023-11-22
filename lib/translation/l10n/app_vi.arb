@@ -23,6 +23,12 @@
         "example": "Bob"
       }
     }
-  }
+  },
+  "detail": "Chi tiết",
+  "choiceYourSport": "Chọn môn thể thao của bạn",
+  "editSport": "Chỉnh sửa",
+  "createSport": "Tạo môn mới",
+  "resume": "Tiếp tục",
+  "round": "Hiệp"
 
 }

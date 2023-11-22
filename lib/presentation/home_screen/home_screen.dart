@@ -1,6 +1,7 @@
 import 'package:boxing_traning/common/app_localization_utils.dart';
 import 'package:boxing_traning/common/color_utils.dart';
 import 'package:boxing_traning/common/enum/martial_art_enum.dart';
+import 'package:boxing_traning/common/shared_widgets/appbar_common.dart';
 import 'package:boxing_traning/common/shared_widgets/base_scaffold.dart';
 import 'package:boxing_traning/common/shared_widgets/common_button.dart';
 import 'package:boxing_traning/config/routers/router_name.dart';
@@ -34,10 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
-      appBar: AppBar(
-        backgroundColor: ColorUtils.primary,
-        title: const Text('Choice Your Skill'),
-      ),
+      appBar:
+          AppBarCommon(title: AppLocalizationUtils.instance().choiceYourSport),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -107,7 +106,10 @@ class _MartialArtItem extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
-            color: ColorUtils.primary, borderRadius: BorderRadius.circular(15)),
+          color: ColorUtils.primaryNew.withOpacity(0.8),
+          // gradient: linearGradientCommon,
+          borderRadius: BorderRadius.circular(15),
+        ),
         child: Text(
           martialArtModel.name ?? '',
           style: const TextStyle(

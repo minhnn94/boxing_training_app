@@ -17,10 +17,10 @@ class TimingCubit extends Cubit<TimingState> {
     final roundTotal = martialArt.totalRounds;
     final prepareTime = martialArt.prepareTime;
     emit(state.copyWith(
-      restTime: breakTime,
+      breakTime: breakTime,
       roundTime: roundTime,
       roundTotal: roundTotal,
-      reminderFinishTime: prepareTime,
+      prepareTime: prepareTime,
     ));
   }
 
@@ -28,16 +28,34 @@ class TimingCubit extends Cubit<TimingState> {
   Timer? _trainingTimer;
   Timer? _restingTimer;
   void onInit() {}
+  void onPrepareDone() {
+    emit(state.copyWith(isPreparing: false, isRunning: true));
+    startTime();
+  }
+
   void handleOnPressButtonProcess() {
     if (state.currentRound >= state.roundTotal) {
       return;
     }
-    if (state.isRunning) {
-      pause();
+    if (state.isPause) {
+      _handleResume();
     } else {
-      emit(state.copyWith(isRunning: true));
-      startTime();
+      _handlePause();
     }
+  }
+
+  void _handleResume() {
+    if (state.isRunning) {
+      startTime();
+    } else {
+      startToRest();
+    }
+    emit(state.copyWith(isPause: false));
+  }
+
+  void _handlePause() {
+    pause();
+    emit(state.copyWith(isPause: true));
   }
 
 /*   ======================= Running Time ==============================*/
@@ -51,11 +69,11 @@ class TimingCubit extends Cubit<TimingState> {
   }
 
   void _changeTimer(Timer timer) {
-    if (state.trainingTime == 0) {
+    if (state.roundTime == 0) {
       _handleWhenFinishRound();
     } else {
-      final timing = state.trainingTime - 1;
-      if (timing == state.reminderFinishTime) {
+      final timing = state.roundTime - 1;
+      if (timing == state.prepareTime) {
         SoundPlay().playReminderSound();
       }
       emit(state.copyWith(
@@ -70,7 +88,7 @@ class TimingCubit extends Cubit<TimingState> {
       final currentRound = state.currentRound + 1;
       final restingTime = martialArt.breakTime;
       emit(state.copyWith(
-        restTime: restingTime,
+        breakTime: restingTime,
         currentRound: currentRound,
         isRunning: false,
       ));
@@ -92,12 +110,12 @@ class TimingCubit extends Cubit<TimingState> {
   }
 
   void _changeTimeRest(Timer timer) {
-    if (state.restTime == 0) {
+    if (state.breakTime == 0) {
       _handleWhenFinishRestTime();
     } else {
-      final timing = state.restTime - 1;
+      final timing = state.breakTime - 1;
       emit(state.copyWith(
-        restTime: timing,
+        breakTime: timing,
       ));
     }
   }
@@ -113,7 +131,7 @@ class TimingCubit extends Cubit<TimingState> {
   void pause() {
     _restingTimer?.cancel();
     _trainingTimer?.cancel();
-    emit(state.copyWith(isRunning: false));
+    // emit(state.copyWith(isRunning: false));
   }
 
   void onDispose() {}

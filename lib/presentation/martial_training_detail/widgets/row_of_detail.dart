@@ -25,14 +25,14 @@ class RowOfDetail extends StatelessWidget {
           style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
-              color: ColorUtils.primary),
+              color: ColorUtils.white),
         ),
         Text(
           content,
           style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
-              color: ColorUtils.primary),
+              color: ColorUtils.white),
         ),
       ],
     );
