@@ -1,4 +1,5 @@
 import 'package:boxing_traning/common/app_localization_utils.dart';
+import 'package:boxing_traning/common/color_utils.dart';
 import 'package:boxing_traning/common/constant/padding_constant.dart';
 import 'package:boxing_traning/common/constant/sized_box_constant.dart';
 import 'package:boxing_traning/common/shared_widgets/appbar_common.dart';
@@ -87,6 +88,7 @@ class _MartialTrainingDetailState extends State<MartialTrainingDetail> {
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
+      backgroundColor: ColorUtils.backgroundColor,
       appBar: AppBarCommon(
         title: AppLocalizationUtils.instance().detail,
         actions: [
@@ -118,7 +120,7 @@ class _MartialTrainingDetailState extends State<MartialTrainingDetail> {
             final sportName = sport.name ?? '';
             final localLanguage = AppLocalizationUtils.instance();
             return Padding(
-              padding: PAD_H16,
+              padding: padH16,
               child: Column(
                 children: [
                   Expanded(
@@ -158,7 +160,8 @@ class _MartialTrainingDetailState extends State<MartialTrainingDetail> {
                       context.pushNamed(RouterPath.timingScreen,
                           extra: widget.martial);
                     },
-                  )
+                  ),
+                  sizedHeight16,
                 ],
               ),
             );

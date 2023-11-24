@@ -1,4 +1,3 @@
-import 'package:boxing_traning/common/color_utils.dart';
 import 'package:flutter/material.dart';
 // import 'package:sales_support/utils/keyboard_utils/keyboard_utils.dart';
 
@@ -16,6 +15,7 @@ class BaseScaffold extends StatelessWidget {
     this.onWillPop,
     this.resizeToAvoidBottomInset,
     this.appBar,
+    this.backgroundColor,
   }) : super(key: key);
   final bool isIgnoreRightAction;
   final Widget body;
@@ -25,6 +25,7 @@ class BaseScaffold extends StatelessWidget {
   final WillPopCallback? onWillPop;
   final bool? resizeToAvoidBottomInset;
   final PreferredSizeWidget? appBar;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +36,11 @@ class BaseScaffold extends StatelessWidget {
         }
         return true;
       },
-      child: Scaffold(
-        resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-        // appBar: appBar,
-        backgroundColor: ColorUtils.backgroundColor,
-        body: SafeArea(
-          child: GestureDetector(
+      child: SafeArea(
+        child: Scaffold(
+          extendBodyBehindAppBar: true,
+          resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+          body: GestureDetector(
             onTap: () {
               // AppKeyboardUtils.unFocusTextField();
             },
@@ -51,15 +51,12 @@ class BaseScaffold extends StatelessWidget {
                         "https://images.unsplash.com/photo-1579202673506-ca3ce28943ef"),
                     fit: BoxFit.cover),
               ),
-              // decoration: const BoxDecoration(
-              //   image: DecorationImage(
-              //       image: AssetImage('assets/images/vietnam_topteam.jpeg'),
-              //       fit: BoxFit.contain),
-              // )
               child: Column(
                 children: [
                   appBar ?? const SizedBox.shrink(),
-                  Expanded(child: body),
+                  Expanded(
+                    child: Container(color: backgroundColor, child: body),
+                  ),
                 ],
               ),
             ),

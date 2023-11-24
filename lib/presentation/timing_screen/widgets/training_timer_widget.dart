@@ -1,5 +1,4 @@
 import 'package:boxing_traning/common/color_utils.dart';
-import 'package:boxing_traning/common/constant/gradient.dart';
 import 'package:boxing_traning/presentation/timing_screen/timing_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,8 +20,8 @@ class TrainingTimerWidget extends StatelessWidget {
       width: double.infinity,
       height: 300,
       decoration: const BoxDecoration(
-          color: ColorUtils.trainingColor,
-          gradient: trainingGradient,
+          color: ColorUtils.primaryNew,
+          // gradient: trainingGradient,
           borderRadius: BorderRadius.all(Radius.circular(16))),
       child: Center(
         child: BlocSelector<TimingCubit, TimingState, int>(

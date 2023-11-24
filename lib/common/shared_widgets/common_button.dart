@@ -34,7 +34,7 @@ class CommonButton extends StatelessWidget {
     if (disable) {
       return disableBackground ?? ColorUtils.grey;
     } else {
-      return backgroundColor ?? ColorUtils.primary;
+      return backgroundColor ?? ColorUtils.orange;
     }
   }
 
@@ -54,7 +54,7 @@ class CommonButton extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           color: _getBackgroundColor(),
-          gradient: _getGradient(),
+          // gradient: _getGradient(),
           borderRadius: BorderConstant.borderRadiusAll08,
         ),
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),

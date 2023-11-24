@@ -73,7 +73,7 @@ class _TimePickerCustomState extends State<TimePickerCustom> {
                 InkWell(
                   onTap: _handleOnPressCancel,
                   child: Padding(
-                    padding: PAD_ALL_16,
+                    padding: padAll16,
                     child: Text(
                       localLanguage.cancel,
                       style: TextStyleUtils.text14Weight600
@@ -84,7 +84,7 @@ class _TimePickerCustomState extends State<TimePickerCustom> {
                 InkWell(
                   onTap: _handleOnPressDone,
                   child: Padding(
-                    padding: PAD_ALL_16,
+                    padding: padAll16,
                     child: Text(
                       localLanguage.done,
                       style: TextStyleUtils.text14Weight600

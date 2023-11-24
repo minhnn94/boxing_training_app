@@ -62,7 +62,7 @@ class SetupScreen extends StatelessWidget {
       body: Container(
         color: ColorUtils.lightPrimary,
         child: Padding(
-          padding: PAD_H16,
+          padding: padH16,
           child: Column(
             children: [
               Expanded(

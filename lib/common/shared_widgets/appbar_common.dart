@@ -8,10 +8,12 @@ class AppBarCommon extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     this.actions,
     this.centerTitle = true,
+    this.canBack = true,
   });
   final String title;
   final List<Widget>? actions;
   final bool centerTitle;
+  final bool canBack;
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -21,9 +23,12 @@ class AppBarCommon extends StatelessWidget implements PreferredSizeWidget {
       // flexibleSpace: Container(
       //   decoration: BoxDecoration(gradient: linearGradientCommon),
       // ),
-      leading: InkWell(
-        onTap: context.pop,
-        child: const Icon(Icons.arrow_back_rounded),
+      leading: Visibility(
+        visible: canBack,
+        child: InkWell(
+          onTap: context.pop,
+          child: const Icon(Icons.arrow_back_rounded),
+        ),
       ),
       actions: actions,
     );

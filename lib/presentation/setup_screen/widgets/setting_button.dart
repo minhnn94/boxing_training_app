@@ -35,7 +35,7 @@ class SettingButton extends StatelessWidget {
       onTap: () => showIOSTimePicker(context),
       child: Container(
           width: double.infinity,
-          padding: PAD_H16,
+          padding: padH16,
           decoration: const BoxDecoration(
               gradient: linearGradientCommon,
               borderRadius: BorderRadius.all(Radius.circular(8))),

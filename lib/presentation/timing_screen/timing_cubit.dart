@@ -16,11 +16,13 @@ class TimingCubit extends Cubit<TimingState> {
     final breakTime = martialArt.breakTime;
     final roundTotal = martialArt.totalRounds;
     final prepareTime = martialArt.prepareTime;
+    final name = martialArt.name;
     emit(state.copyWith(
       breakTime: breakTime,
       roundTime: roundTime,
       roundTotal: roundTotal,
       prepareTime: prepareTime,
+      name: name,
     ));
   }
 

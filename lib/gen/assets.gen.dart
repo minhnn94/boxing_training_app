@@ -9,6 +9,20 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/conor.jpeg
+  AssetGenImage get conor => const AssetGenImage('assets/images/conor.jpeg');
+
+  /// File path: assets/images/vietnam_topteam.jpeg
+  AssetGenImage get vietnamTopteam =>
+      const AssetGenImage('assets/images/vietnam_topteam.jpeg');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [conor, vietnamTopteam];
+}
+
 class $AssetsMp3Gen {
   const $AssetsMp3Gen();
 
@@ -25,6 +39,7 @@ class $AssetsMp3Gen {
 class Assets {
   Assets._();
 
+  static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsMp3Gen mp3 = $AssetsMp3Gen();
 }
 

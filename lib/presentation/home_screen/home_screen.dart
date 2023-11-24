@@ -1,6 +1,6 @@
 import 'package:boxing_traning/common/app_localization_utils.dart';
 import 'package:boxing_traning/common/color_utils.dart';
-import 'package:boxing_traning/common/enum/martial_art_enum.dart';
+import 'package:boxing_traning/common/constant/sized_box_constant.dart';
 import 'package:boxing_traning/common/shared_widgets/appbar_common.dart';
 import 'package:boxing_traning/common/shared_widgets/base_scaffold.dart';
 import 'package:boxing_traning/common/shared_widgets/common_button.dart';
@@ -12,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import 'home_cubit.dart';
+import 'widgets/martial_art_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -35,8 +36,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
-      appBar:
-          AppBarCommon(title: AppLocalizationUtils.instance().choiceYourSport),
+      backgroundColor: ColorUtils.backgroundColor,
+      appBar: AppBarCommon(
+        canBack: false,
+        title: AppLocalizationUtils.instance().choiceYourSport,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -48,72 +52,34 @@ class _HomeScreenState extends State<HomeScreen> {
               builder: (context, state) {
                 final data = state ?? [];
                 return Expanded(
-                  child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithMaxCrossAxisExtent(
-                              maxCrossAxisExtent: 200,
-                              childAspectRatio: 3 / 2,
-                              crossAxisSpacing: 20,
-                              mainAxisSpacing: 20),
-                      itemCount: data.length,
-                      itemBuilder: (BuildContext ctx, index) {
-                        final martialArtModel = data[index];
-                        return _MartialArtItem(
-                          martialArtModel: martialArtModel,
-                        );
-                      }),
+                  child: ListView.separated(
+                    // gridDelegate:
+                    //     const SliverGridDelegateWithMaxCrossAxisExtent(
+                    //   maxCrossAxisExtent: 200,
+                    //   childAspectRatio: 3 / 2,
+                    //   crossAxisSpacing: 20,
+                    //   mainAxisSpacing: 20,
+                    // ),
+                    itemCount: data.length,
+                    itemBuilder: (BuildContext ctx, index) {
+                      final martialArtModel = data[index];
+                      return MartialArtItem(
+                        martialArtModel: martialArtModel,
+                      );
+                    },
+                    separatorBuilder: (_, __) {
+                      return sizedHeight08;
+                    },
+                  ),
                 );
               },
             ),
             CommonButton(
               title: AppLocalizationUtils.instance().createNewSport,
               onPress: _handleOnPressCreateNewSport,
-            )
+            ),
+            sizedHeight16,
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class _MartialArtItem extends StatelessWidget {
-  const _MartialArtItem({
-    super.key,
-    required this.martialArtModel,
-  });
-
-  final MartialTemplate martialArtModel;
-
-  String getNameDisplay(MartialArtEnum martialArtEnum) {
-    if (martialArtEnum != MartialArtEnum.createLesson) {
-      return martialArtEnum.name;
-    } else {
-      return '+ ${martialArtEnum.name}';
-    }
-  }
-
-  void _handleOnPressItem(BuildContext context) {
-    // context.pushNamed(RouterPath.timingScreen, extra: martialArtModel);
-    context
-        .pushNamed(RouterPath.martialDetail, extra: martialArtModel)
-        .then((value) => context.read<HomeCubit>().getAllSport());
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => _handleOnPressItem(context),
-      child: Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: ColorUtils.primaryNew.withOpacity(0.8),
-          // gradient: linearGradientCommon,
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: Text(
-          martialArtModel.name ?? '',
-          style: const TextStyle(
-              fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white),
         ),
       ),
     );
