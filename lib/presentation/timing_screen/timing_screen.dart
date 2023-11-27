@@ -4,16 +4,16 @@ import 'package:boxing_traning/common/constant/padding_constant.dart';
 import 'package:boxing_traning/common/constant/sized_box_constant.dart';
 import 'package:boxing_traning/common/shared_widgets/appbar_common.dart';
 import 'package:boxing_traning/common/shared_widgets/base_scaffold.dart';
-import 'package:boxing_traning/common/shared_widgets/timing_process_button.dart';
 import 'package:boxing_traning/common/text_style_utils.dart';
 import 'package:boxing_traning/presentation/timing_screen/timing_cubit.dart';
-import 'package:boxing_traning/presentation/timing_screen/widgets/render_time_component.dart';
+import 'package:boxing_traning/presentation/timing_screen/widgets/process_time/in_process_time_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'widgets/finished_time_content.dart';
 import 'widgets/round_indicator.dart';
 
-typedef TimingSelector<T> = BlocSelector<TimingCubit, TimingState, T>;
+typedef TimingSelector<T> = BlocSelector<TimingCubit, TimingPlayState, T>;
 
 class TimingScreen extends StatelessWidget {
   const TimingScreen({super.key});
@@ -34,34 +34,13 @@ class TimingScreen extends StatelessWidget {
     }
   }
 
-  bool _getButtonBuildWhen(TimingState previous, TimingState current) {
-    return previous.isPreparing != current.isPreparing ||
-        previous.isRunning != current.isRunning ||
-        previous.isPause != current.isPause;
-  }
-
-  Color _getColorProcess(bool isPrepare) {
-    if (isPrepare) {
-      return ColorUtils.grey;
-    } else {
-      return ColorUtils.orange;
-    }
-  }
-
-  IconData _getIconProcess(bool isPause) {
-    if (isPause) {
-      return Icons.play_arrow;
-    } else {
-      return Icons.pause;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<TimingCubit>();
     return BaseScaffold(
       backgroundColor: ColorUtils.backgroundColor,
       appBar: AppBarCommon(
-        title: context.read<TimingCubit>().state.name,
+        title: cubit.state.name,
       ),
       body: Padding(
         padding: padH16,
@@ -75,7 +54,7 @@ class TimingScreen extends StatelessWidget {
                   AppLocalizationUtils.instance().round,
                   style: TextStyleUtils.text16Weight600,
                 ),
-                BlocBuilder<TimingCubit, TimingState>(
+                BlocBuilder<TimingCubit, TimingPlayState>(
                   buildWhen: (previous, current) =>
                       previous.currentRound != current.currentRound,
                   builder: (context, state) {
@@ -87,65 +66,63 @@ class TimingScreen extends StatelessWidget {
                 )
               ],
             ),
-            Expanded(
-              child: Column(
-                children: const [
-                  SizedBox(
-                    height: 30,
-                  ),
-                  sizedHeight32,
-                  sizedHeight16,
-                  RenderTimeComponent(),
-                  sizedHeight32,
-                ],
-              ),
-            ),
-            // BlocBuilder<TimingCubit, TimingState>(
-            //   buildWhen: _getButtonBuildWhen,
-            //   builder: (context, state) {
-            //     return CommonButton(
-            //       disable: state.isPreparing,
-            //       backgroundColor: getAppBarColor(state.isRunning),
-            //       title: getTitleButton(state.isPause),
-            //       onPress:
-            //           context.read<TimingCubit>().handleOnPressButtonProcess,
-            //     );
-            //   },
+            BlocBuilder<TimingCubit, TimingPlayState>(builder: (_, state) {
+              if (!state.isFinished) {
+                return const InProcessTime();
+              } else {
+                return const FinishedTimeContent();
+              }
+            })
+            // Expanded(
+            //   child: Column(
+            //     children: [
+            //       Expanded(
+            //         child: Column(
+            //           children: const [
+            //             SizedBox(
+            //               height: 30,
+            //             ),
+            //             sizedHeight32,
+            //             sizedHeight16,
+            //             RenderTimeComponent(),
+            //             sizedHeight32,
+            //           ],
+            //         ),
+            //       ),
+            //       Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //         children: [
+            //           BlocBuilder<TimingCubit, TimingPlayState>(
+            //             buildWhen: _getButtonBuildWhen,
+            //             builder: (context, state) {
+            //               return TimingProcessButton(
+            //                   onPress: cubit.handleOnPressButtonProcess,
+            //                   icon: Icon(
+            //                     _getIconProcess(state.isPause),
+            //                     size: 60,
+            //                     color: ColorUtils.white,
+            //                   ),
+            //                   centerColor: _getColorProcess(state.isPreparing));
+            //             },
+            //           ),
+            //           TimingProcessButton(
+            //             onPress: cubit.handleOnPressButtonProcess,
+            //             icon: Center(
+            //               child: Container(
+            //                 width: 26,
+            //                 height: 26,
+            //                 color: ColorUtils.white,
+            //               ),
+            //             ),
+            //             centerColor: ColorUtils.recordColor,
+            //           )
+            //         ],
+            //       ),
+            //       sizedHeight32,
+            //       sizedHeight32,
+            //     ],
+            //   ),
             // ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                BlocBuilder<TimingCubit, TimingState>(
-                  buildWhen: _getButtonBuildWhen,
-                  builder: (context, state) {
-                    return TimingProcessButton(
-                        onPress: context
-                            .read<TimingCubit>()
-                            .handleOnPressButtonProcess,
-                        icon: Icon(
-                          _getIconProcess(state.isPause),
-                          size: 60,
-                          color: ColorUtils.white,
-                        ),
-                        centerColor: _getColorProcess(state.isPreparing));
-                  },
-                ),
-                TimingProcessButton(
-                  onPress:
-                      context.read<TimingCubit>().handleOnPressButtonProcess,
-                  icon: Center(
-                    child: Container(
-                      width: 26,
-                      height: 26,
-                      color: ColorUtils.white,
-                    ),
-                  ),
-                  centerColor: ColorUtils.recordColor,
-                )
-              ],
-            ),
-            sizedHeight32,
-            sizedHeight32,
           ],
         ),
       ),

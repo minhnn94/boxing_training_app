@@ -1,6 +1,6 @@
 import 'package:boxing_traning/common/color_utils.dart';
 import 'package:boxing_traning/common/constant/border_constant.dart';
-import 'package:boxing_traning/common/constant/gradient.dart';
+import 'package:boxing_traning/common/constant/padding_constant.dart';
 import 'package:boxing_traning/common/text_style_utils.dart';
 import 'package:flutter/material.dart';
 
@@ -38,14 +38,6 @@ class CommonButton extends StatelessWidget {
     }
   }
 
-  LinearGradient _getGradient() {
-    if (!disable) {
-      return linearGradientCommon;
-    } else {
-      return disableGradient;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -57,7 +49,7 @@ class CommonButton extends StatelessWidget {
           // gradient: _getGradient(),
           borderRadius: BorderConstant.borderRadiusAll08,
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+        padding: padH16V12,
         child: child ??
             Text(
               title,

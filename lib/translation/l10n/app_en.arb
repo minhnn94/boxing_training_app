@@ -48,6 +48,10 @@
   "editSport": "Edit Sport",
   "createSport": "Create New Sport",
   "resume": "Resume",
-  "round": "Round"
+  "round": "Round",
+  "confirm": "Confirm",
+  "finished": "Finished",
+  "backAndSave": "Back and Save"
+
 
 }

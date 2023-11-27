@@ -1,5 +1,4 @@
 import 'package:boxing_traning/common/color_utils.dart';
-import 'package:boxing_traning/common/constant/gradient.dart';
 import 'package:flutter/material.dart';
 
 class TextStyleUtils {
@@ -11,6 +10,6 @@ class TextStyleUtils {
     fontSize: 16,
     fontWeight: FontWeight.w600,
     color: ColorUtils.white,
-    foreground: foreGroundCommon,
+    // foreground: foreGroundCommon,
   );
 }

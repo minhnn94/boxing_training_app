@@ -7,8 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'timing_state.dart';
 
-class TimingCubit extends Cubit<TimingState> {
-  TimingCubit(this.martialArt) : super(TimingState()) {
+class TimingCubit extends Cubit<TimingPlayState> {
+  TimingCubit(this.martialArt) : super(TimingPlayState()) {
     _initState();
   }
   void _initState() {
@@ -87,14 +87,15 @@ class TimingCubit extends Cubit<TimingState> {
   void _handleWhenFinishRound() {
     _trainingTimer?.cancel();
     if (state.currentRound < state.roundTotal) {
-      final currentRound = state.currentRound + 1;
       final restingTime = martialArt.breakTime;
       emit(state.copyWith(
         breakTime: restingTime,
-        currentRound: currentRound,
+        // currentRound: currentRound,
         isRunning: false,
       ));
       startToRest();
+    } else {
+      emit(state.copyWith(isFinished: true));
     }
   }
 /*   ======================= Resting Time ==============================*/
@@ -125,8 +126,13 @@ class TimingCubit extends Cubit<TimingState> {
   void _handleWhenFinishRestTime() {
     _restingTimer?.cancel();
     final roundTime = martialArt.roundTime;
-    emit(state.copyWith(roundTime: roundTime, isRunning: true));
+    final currentRound = state.currentRound + 1;
 
+    emit(state.copyWith(
+      roundTime: roundTime,
+      isRunning: true,
+      currentRound: currentRound,
+    ));
     startTime();
   }
 
@@ -134,6 +140,11 @@ class TimingCubit extends Cubit<TimingState> {
     _restingTimer?.cancel();
     _trainingTimer?.cancel();
     // emit(state.copyWith(isRunning: false));
+  }
+
+  void handleOnPressFinish() {
+    pause();
+    emit(state.copyWith(isFinished: true));
   }
 
   void onDispose() {}

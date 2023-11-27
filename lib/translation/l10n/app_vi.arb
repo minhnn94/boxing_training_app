@@ -29,6 +29,9 @@
   "editSport": "Chỉnh sửa",
   "createSport": "Tạo môn mới",
   "resume": "Tiếp tục",
-  "round": "Hiệp"
+  "round": "Hiệp",
+  "confirm": "Xác nhận",
+  "finished": "Hoàn thành",
+  "backAndSave": "Thoát và lưu"
 
 }

@@ -3,7 +3,7 @@ import 'package:boxing_traning/presentation/timing_screen/timing_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../common/time_utils.dart';
+import '../../../../common/time_utils.dart';
 
 class TrainingTimerWidget extends StatelessWidget {
   const TrainingTimerWidget({
@@ -24,7 +24,7 @@ class TrainingTimerWidget extends StatelessWidget {
           // gradient: trainingGradient,
           borderRadius: BorderRadius.all(Radius.circular(16))),
       child: Center(
-        child: BlocSelector<TimingCubit, TimingState, int>(
+        child: BlocSelector<TimingCubit, TimingPlayState, int>(
           selector: (state) => state.roundTime,
           builder: (context, state) {
             return Text(

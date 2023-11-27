@@ -2,6 +2,7 @@ import 'package:boxing_traning/common/app_localization_utils.dart';
 import 'package:boxing_traning/common/color_utils.dart';
 import 'package:boxing_traning/common/constant/padding_constant.dart';
 import 'package:boxing_traning/common/constant/sized_box_constant.dart';
+import 'package:boxing_traning/common/extensions/go_router_extension.dart';
 import 'package:boxing_traning/common/shared_widgets/appbar_common.dart';
 import 'package:boxing_traning/common/shared_widgets/base_scaffold.dart';
 import 'package:boxing_traning/common/shared_widgets/common_button.dart';
@@ -61,7 +62,7 @@ class _MartialTrainingDetailState extends State<MartialTrainingDetail> {
         .read<MartialTrainingCubit>()
         .deleteMaterialArt(widget.martial.id)
         .then((value) {
-      context.pop();
+      context.popUntilPath(RouterPath.homeScreen);
     });
   }
 
@@ -70,6 +71,7 @@ class _MartialTrainingDetailState extends State<MartialTrainingDetail> {
       context: context,
       builder: (_) => ConfirmDialog(
         martial: widget.martial,
+        onPressConfirm: _handleOnPressConfirmDelete,
       ),
     );
   }
@@ -157,8 +159,10 @@ class _MartialTrainingDetailState extends State<MartialTrainingDetail> {
                   CommonButton(
                     title: localLanguage.start,
                     onPress: () {
-                      context.pushNamed(RouterPath.timingScreen,
-                          extra: widget.martial);
+                      context.pushNamed(
+                        RouterPath.timingScreen,
+                        extra: state.martialTemplate,
+                      );
                     },
                   ),
                   sizedHeight16,

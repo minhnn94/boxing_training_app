@@ -1,7 +1,6 @@
 import 'package:boxing_traning/common/app_localization_utils.dart';
 import 'package:boxing_traning/common/color_utils.dart';
 import 'package:boxing_traning/common/constant/border_constant.dart';
-import 'package:boxing_traning/common/constant/gradient.dart';
 import 'package:boxing_traning/common/constant/padding_constant.dart';
 import 'package:boxing_traning/common/constant/sized_box_constant.dart';
 import 'package:boxing_traning/common/shared_widgets/appbar_common.dart';
@@ -116,7 +115,7 @@ class SetupScreen extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.only(left: 16),
                       decoration: const BoxDecoration(
-                        gradient: linearGradientCommon,
+                        color: ColorUtils.primaryNew,
                         borderRadius: BorderConstant.borderRadiusAll08,
                       ),
                       child: Row(
@@ -164,7 +163,8 @@ class SetupScreen extends StatelessWidget {
                     onPress: () => _handleOnPressDone(context),
                   );
                 },
-              )
+              ),
+              sizedHeight16,
             ],
           ),
         ),
