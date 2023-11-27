@@ -39,7 +39,7 @@ dependencies:
   go_router: ^11.1.2
   flutter_localizations:
     sdk: flutter
-  intl: any
+  intl: ^0.17.0
   assets_audio_player: ^3.0.8
   percent_indicator: ^4.2.3
   equatable: ^2.0.4
@@ -66,7 +66,8 @@ dev_dependencies:
   flutter_gen_runner:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
+dependency_overrides:
+  intl: 0.17.0
 # The following section is specific to Flutter packages.
 flutter:
   generate: true

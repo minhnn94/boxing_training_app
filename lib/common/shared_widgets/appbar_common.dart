@@ -1,4 +1,5 @@
 import 'package:boxing_traning/common/color_utils.dart';
+import 'package:boxing_traning/common/text_style_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,7 +18,10 @@ class AppBarCommon extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title),
+      title: Text(
+        title,
+        style: TextStyleUtils.text16Weight600.copyWith(color: ColorUtils.white),
+      ),
       centerTitle: centerTitle,
       backgroundColor: ColorUtils.primaryNew,
       // flexibleSpace: Container(
@@ -27,7 +31,10 @@ class AppBarCommon extends StatelessWidget implements PreferredSizeWidget {
         visible: canBack,
         child: InkWell(
           onTap: context.pop,
-          child: const Icon(Icons.arrow_back_rounded),
+          child: const Icon(
+            Icons.arrow_back_rounded,
+            color: ColorUtils.white,
+          ),
         ),
       ),
       actions: actions,

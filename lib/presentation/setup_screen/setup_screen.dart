@@ -55,6 +55,7 @@ class SetupScreen extends StatelessWidget {
     final cubit = context.read<SetupCubit>();
     final martial = setupParams.martial;
     return BaseScaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBarCommon(
         title: getTitleAppBar(),
       ),
@@ -64,94 +65,93 @@ class SetupScreen extends StatelessWidget {
           padding: padH16,
           child: Column(
             children: [
-              Expanded(
-                child: Column(
-                  children: [
-                    sizedHeight32,
-                    InputMartialArtName(
-                      onChanged: cubit.onChangedName,
-                      name: martial?.name ?? '',
+              Column(
+                children: [
+                  sizedHeight32,
+                  InputMartialArtName(
+                    onChanged: cubit.onChangedName,
+                    name: martial?.name ?? '',
+                  ),
+                  sizedHeight32,
+                  SetupSelector(
+                    selector: (state) {
+                      return state.prepareTime;
+                    },
+                    builder: (context, state) {
+                      return SettingButton(
+                        title: localLanguage.prepareTime,
+                        time: state ?? 0,
+                        onChangeTime: cubit.handleOnPressChangePrepareTime,
+                      );
+                    },
+                  ),
+                  sizedHeight32,
+                  SetupSelector(
+                    selector: (state) {
+                      return state.roundTime;
+                    },
+                    builder: (context, state) {
+                      return SettingButton(
+                        title: localLanguage.roundTime,
+                        time: state ?? 0,
+                        onChangeTime: cubit.handleOnPressChangeRoundTime,
+                      );
+                    },
+                  ),
+                  sizedHeight32,
+                  SetupSelector(
+                    selector: (state) {
+                      return state.breakTime;
+                    },
+                    builder: (context, state) {
+                      return SettingButton(
+                        title: localLanguage.breakTime,
+                        time: state ?? 0,
+                        onChangeTime: cubit.handleOnPressChangeBreakTime,
+                      );
+                    },
+                  ),
+                  sizedHeight32,
+                  Container(
+                    padding: const EdgeInsets.only(left: 16),
+                    decoration: const BoxDecoration(
+                      color: ColorUtils.primaryNew,
+                      borderRadius: BorderConstant.borderRadiusAll08,
                     ),
-                    sizedHeight32,
-                    SetupSelector(
-                      selector: (state) {
-                        return state.prepareTime;
-                      },
-                      builder: (context, state) {
-                        return SettingButton(
-                          title: localLanguage.prepareTime,
-                          time: state ?? 0,
-                          onChangeTime: cubit.handleOnPressChangePrepareTime,
-                        );
-                      },
-                    ),
-                    sizedHeight32,
-                    SetupSelector(
-                      selector: (state) {
-                        return state.roundTime;
-                      },
-                      builder: (context, state) {
-                        return SettingButton(
-                          title: localLanguage.roundTime,
-                          time: state ?? 0,
-                          onChangeTime: cubit.handleOnPressChangeRoundTime,
-                        );
-                      },
-                    ),
-                    sizedHeight32,
-                    SetupSelector(
-                      selector: (state) {
-                        return state.breakTime;
-                      },
-                      builder: (context, state) {
-                        return SettingButton(
-                          title: localLanguage.breakTime,
-                          time: state ?? 0,
-                          onChangeTime: cubit.handleOnPressChangeBreakTime,
-                        );
-                      },
-                    ),
-                    sizedHeight32,
-                    Container(
-                      padding: const EdgeInsets.only(left: 16),
-                      decoration: const BoxDecoration(
-                        color: ColorUtils.primaryNew,
-                        borderRadius: BorderConstant.borderRadiusAll08,
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              localLanguage.totalRounds,
-                              style: TextStyleUtils.text14Weight600
-                                  .copyWith(color: ColorUtils.white),
-                            ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            localLanguage.totalRounds,
+                            style: TextStyleUtils.text14Weight600
+                                .copyWith(color: ColorUtils.white),
                           ),
-                          SetupSelector(
-                            selector: (state) {
-                              return state.totalRounds;
-                            },
-                            builder: (context, state) {
-                              return Expanded(
-                                  child: UpAndDownTextField(
-                                padding: EdgeInsets.zero,
-                                baseValue: "${state ?? 0}",
-                                decoration: const InputDecoration.collapsed(
-                                  hintText: '',
-                                ),
-                                onChanged: (value) =>
-                                    cubit.handleOnPressChangeTotalRounds(
-                                        value.toInt()),
-                              ));
-                            },
-                          ),
-                        ],
-                      ),
+                        ),
+                        SetupSelector(
+                          selector: (state) {
+                            return state.totalRounds;
+                          },
+                          builder: (context, state) {
+                            return Expanded(
+                                child: UpAndDownTextField(
+                              padding: EdgeInsets.zero,
+                              baseValue: "${state ?? 0}",
+                              decoration: const InputDecoration.collapsed(
+                                hintText: '',
+                              ),
+                              onChanged: (value) =>
+                                  cubit.handleOnPressChangeTotalRounds(
+                                      value.toInt()),
+                            ));
+                          },
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
+              Spacer(),
               BlocSelector<SetupCubit, SetupState, bool>(
                 selector: (state) {
                   return state.isEnableConfirm;
