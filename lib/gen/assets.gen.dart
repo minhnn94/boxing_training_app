@@ -15,12 +15,25 @@ class $AssetsImagesGen {
   /// File path: assets/images/conor.jpeg
   AssetGenImage get conor => const AssetGenImage('assets/images/conor.jpeg');
 
+  /// File path: assets/images/dustin_poirier.jpeg
+  AssetGenImage get dustinPoirier =>
+      const AssetGenImage('assets/images/dustin_poirier.jpeg');
+
+  /// File path: assets/images/poirier_2.jpeg
+  AssetGenImage get poirier2 =>
+      const AssetGenImage('assets/images/poirier_2.jpeg');
+
+  /// File path: assets/images/ufc_background.jpeg
+  AssetGenImage get ufcBackground =>
+      const AssetGenImage('assets/images/ufc_background.jpeg');
+
   /// File path: assets/images/vietnam_topteam.jpeg
   AssetGenImage get vietnamTopteam =>
       const AssetGenImage('assets/images/vietnam_topteam.jpeg');
 
   /// List of all assets
-  List<AssetGenImage> get values => [conor, vietnamTopteam];
+  List<AssetGenImage> get values =>
+      [conor, dustinPoirier, poirier2, ufcBackground, vietnamTopteam];
 }
 
 class $AssetsMp3Gen {
@@ -29,11 +42,14 @@ class $AssetsMp3Gen {
   /// File path: assets/mp3/boxing-bell.mp3
   String get boxingBell => 'assets/mp3/boxing-bell.mp3';
 
+  /// File path: assets/mp3/fight_bell.mp3
+  String get fightBell => 'assets/mp3/fight_bell.mp3';
+
   /// File path: assets/mp3/workout_finished.wav
   String get workoutFinished => 'assets/mp3/workout_finished.wav';
 
   /// List of all assets
-  List<String> get values => [boxingBell, workoutFinished];
+  List<String> get values => [boxingBell, fightBell, workoutFinished];
 }
 
 class Assets {

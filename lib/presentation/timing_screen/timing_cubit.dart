@@ -31,7 +31,14 @@ class TimingCubit extends Cubit<TimingPlayState> {
   Timer? _restingTimer;
   void onInit() {}
   void onPrepareDone() {
-    emit(state.copyWith(isPreparing: false, isRunning: true));
+    final currentRound = state.currentRound + 1;
+    emit(
+      state.copyWith(
+        isPreparing: false,
+        isRunning: true,
+        currentRound: currentRound,
+      ),
+    );
     startTime();
   }
 

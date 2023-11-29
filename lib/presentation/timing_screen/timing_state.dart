@@ -18,7 +18,7 @@ class TimingPlayState extends TimingState {
   TimingPlayState({
     this.roundTime = 10,
     this.isRunning = false,
-    this.currentRound = 1,
+    this.currentRound = 0,
     this.breakTime = 5,
     this.roundTotal = 5,
     this.exerciseStatus = ExerciseStatus.prepare,

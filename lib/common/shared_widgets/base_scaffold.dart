@@ -1,3 +1,4 @@
+import 'package:boxing_traning/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 // import 'package:sales_support/utils/keyboard_utils/keyboard_utils.dart';
 
@@ -45,10 +46,11 @@ class BaseScaffold extends StatelessWidget {
               // AppKeyboardUtils.unFocusTextField();
             },
             child: Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: NetworkImage(
-                        "https://images.unsplash.com/photo-1579202673506-ca3ce28943ef"),
+                    image: AssetImage(Assets.images.ufcBackground.path),
+                    // image: NetworkImage(
+                    //     "https://images.unsplash.com/photo-1579202673506-ca3ce28943ef"),
                     fit: BoxFit.cover),
               ),
               child: Column(
