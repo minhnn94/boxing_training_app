@@ -17,6 +17,7 @@ class BaseScaffold extends StatelessWidget {
     this.resizeToAvoidBottomInset,
     this.appBar,
     this.backgroundColor,
+    this.bottomNavigationBar,
   }) : super(key: key);
   final bool isIgnoreRightAction;
   final Widget body;
@@ -27,7 +28,7 @@ class BaseScaffold extends StatelessWidget {
   final bool? resizeToAvoidBottomInset;
   final PreferredSizeWidget? appBar;
   final Color? backgroundColor;
-
+  final Widget? bottomNavigationBar;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -39,6 +40,7 @@ class BaseScaffold extends StatelessWidget {
       },
       child: SafeArea(
         child: Scaffold(
+          bottomNavigationBar: bottomNavigationBar,
           extendBodyBehindAppBar: true,
           resizeToAvoidBottomInset: resizeToAvoidBottomInset,
           body: GestureDetector(

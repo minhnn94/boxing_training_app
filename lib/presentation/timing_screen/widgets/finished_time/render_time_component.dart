@@ -21,11 +21,13 @@ class RenderTimeComponent extends StatelessWidget {
         buildWhen: _getBuildWhen,
         builder: (context, state) {
           if (state.isPreparing) {
-            return PrepareTimeWidget(
-              prepareTime: state.prepareTime,
-              onPrepareDone: () {
-                context.read<TimingCubit>().onPrepareDone();
-              },
+            return Expanded(
+              child: PrepareTimeWidget(
+                prepareTime: state.prepareTime,
+                onPrepareDone: () {
+                  context.read<TimingCubit>().onPrepareDone();
+                },
+              ),
             );
           } else {
             if (state.isRunning) {

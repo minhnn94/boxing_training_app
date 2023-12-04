@@ -51,11 +51,10 @@ class DBHelper {
           ${DataConstant.totalRounds} INTEGER
           )
         ''');
-    // await db.execute('''
-    //     Create table ${DataConstant.TABLE_PLAN_MANAGE} (${DataConstant.ID} TEXT primary key,
-    //      ${DataConstant.TITLE} TEXT, ${DataConstant.PLANS} TEXT,
-    //       ${DataConstant.TASK_DONE} INTEGER, ${DataConstant.TASK_TOTAL} INTEGER)
-    //     ''');
+    await db.execute('''
+        Create table ${DataConstant.tableHistory} (${DataConstant.historyId} TEXT primary key,
+         ${DataConstant.sportId} TEXT, ${DataConstant.dateTime} INTEGER)
+        ''');
   }
 
   Future<MartialTemplate> update(MartialTemplate planItem) async {

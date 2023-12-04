@@ -1,5 +1,5 @@
 import 'package:boxing_traning/common/global/global_key.dart';
-import 'package:boxing_traning/common/shared_widgets/scafold_with_nav_bar.dart';
+import 'package:boxing_traning/common/shared_widgets/scafold_with_nav_bar/scafold_with_nav_bar.dart';
 import 'package:boxing_traning/config/routers/router_name.dart';
 import 'package:boxing_traning/domain/models/martial_template.dart';
 import 'package:boxing_traning/presentation/home_screen/home_cubit.dart';
@@ -21,15 +21,6 @@ final GoRouter routerManage = GoRouter(
   navigatorKey: navigatorKey,
   initialLocation: '/',
   routes: <RouteBase>[
-    GoRoute(
-        path: '/',
-        builder: (BuildContext context, GoRouterState state) {
-          return BlocProvider(
-            create: (context) => HomeCubit(),
-            child: const SplashScreen(),
-          );
-        }),
-
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
         // Return the widget that implements the custom shell (e.g a BottomNavigationBar).
@@ -45,85 +36,70 @@ final GoRouter routerManage = GoRouter(
           // each routes with its sub routes if available e.g feed/uuid/details
           routes: <RouteBase>[
             GoRoute(
-                path: RouterPath.homeScreen,
-                name: RouterPath.homeScreen,
-                pageBuilder: (BuildContext context, GoRouterState state) {
-                  return CustomTransitionPage(
-                    child: BlocProvider(
-                      create: (context) => HomeCubit(),
-                      child: const HomeScreen(),
-                    ),
-                    transitionsBuilder:
-                        (context, animation, secondaryAnimation, child) {
+              path: RouterPath.homeScreen,
+              name: RouterPath.homeScreen,
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return CustomTransitionPage(
+                  child: BlocProvider(
+                    create: (context) => HomeCubit(),
+                    child: const HomeScreen(),
+                  ),
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
 // Change the opacity of the screen using a Curve based on the the animation's value
-                      return FadeTransition(
-                        opacity: CurveTween(curve: Curves.easeInOutCirc)
-                            .animate(animation),
-                        child: child,
-                      );
-                    },
+                    return FadeTransition(
+                      opacity: CurveTween(curve: Curves.easeInOutCirc)
+                          .animate(animation),
+                      child: child,
+                    );
+                  },
+                );
+              },
+            ),
+            GoRoute(
+                path: '/',
+                builder: (BuildContext context, GoRouterState state) {
+                  return BlocProvider(
+                    create: (context) => HomeCubit(),
+                    child: const SplashScreen(),
                   );
-                },
-                routes: <RouteBase>[
-                  // GoRoute(
-                  //   path: RouterPath.homeScreen,
-                  //   name: RouterPath.homeScreen,
-                  //   pageBuilder: (BuildContext context, GoRouterState state) {
-                  //     return CustomTransitionPage(
-                  //       child: BlocProvider(
-                  //         create: (context) => HomeCubit(),
-                  //         child: const HomeScreen(),
-                  //       ),
-                  //       transitionsBuilder:
-                  //           (context, animation, secondaryAnimation, child) {
-                  //         // Change the opacity of the screen using a Curve based on the the animation's value
-                  //         return FadeTransition(
-                  //           opacity: CurveTween(curve: Curves.easeInOutCirc)
-                  //               .animate(animation),
-                  //           child: child,
-                  //         );
-                  //       },
-                  //     );
-                  //   },
-                  // ),
-                  GoRoute(
-                      path: RouterPath.timingScreen,
-                      name: RouterPath.timingScreen,
-                      builder: (BuildContext context, GoRouterState state) {
-                        final martialArtModel = state.extra;
+                }),
+            GoRoute(
+                path: RouterPath.timingScreen,
+                name: RouterPath.timingScreen,
+                builder: (BuildContext context, GoRouterState state) {
+                  final martialArtModel = state.extra;
 
-                        return BlocProvider(
-                          create: (context) =>
-                              TimingCubit(martialArtModel as MartialTemplate),
-                          child: const TimingScreen(),
-                        );
-                      }),
-                  GoRoute(
-                    path: RouterPath.setupScreen,
-                    name: RouterPath.setupScreen,
-                    builder: (BuildContext context, GoRouterState state) {
-                      final setupParams = state.extra as SetupScreenParams;
-                      return BlocProvider(
-                        create: (context) =>
-                            SetupCubit(martial: setupParams.martial),
-                        child: SetupScreen(
-                          setupParams: setupParams,
-                        ),
-                      );
-                    },
+                  return BlocProvider(
+                    create: (context) =>
+                        TimingCubit(martialArtModel as MartialTemplate),
+                    child: const TimingScreen(),
+                  );
+                }),
+            GoRoute(
+              path: RouterPath.setupScreen,
+              name: RouterPath.setupScreen,
+              builder: (BuildContext context, GoRouterState state) {
+                final setupParams = state.extra as SetupScreenParams;
+                return BlocProvider(
+                  create: (context) => SetupCubit(martial: setupParams.martial),
+                  child: SetupScreen(
+                    setupParams: setupParams,
                   ),
-                  GoRoute(
-                    path: RouterPath.martialDetail,
-                    name: RouterPath.martialDetail,
-                    builder: (BuildContext context, GoRouterState state) {
-                      final martial = state.extra as MartialTemplate;
-                      return BlocProvider(
-                        create: (context) => MartialTrainingCubit(),
-                        child: MartialTrainingDetail(martial: martial),
-                      );
-                    },
-                  ),
-                ]),
+                );
+              },
+            ),
+            GoRoute(
+              path: RouterPath.martialDetail,
+              name: RouterPath.martialDetail,
+              builder: (BuildContext context, GoRouterState state) {
+                final martial = state.extra as MartialTemplate;
+                return BlocProvider(
+                  create: (context) => MartialTrainingCubit(),
+                  child: MartialTrainingDetail(martial: martial),
+                );
+              },
+            ),
           ],
         ),
 
@@ -132,7 +108,7 @@ final GoRouter routerManage = GoRouter(
           // Add this branch routes
           // each routes with its sub routes if available e.g shope/uuid/details
           GoRoute(
-            path: '/shope',
+            path: RouterPath.profile,
             builder: (context, state) => const SplashScreen(),
           ),
         ])

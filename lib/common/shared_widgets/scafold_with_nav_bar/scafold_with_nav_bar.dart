@@ -1,3 +1,5 @@
+import 'package:boxing_traning/common/color_utils.dart';
+import 'package:boxing_traning/common/shared_widgets/base_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -9,13 +11,27 @@ class ScaffoldWithNavbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BaseScaffold(
       body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: navigationShell.currentIndex,
+        selectedItemColor: ColorUtils.orange,
+        unselectedItemColor: ColorUtils.grey200,
+        backgroundColor: ColorUtils.primaryNew,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.shop), label: 'Shope'),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home,
+                size: 40,
+              ),
+              label: ''),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.history_outlined,
+              size: 40,
+            ),
+            label: '',
+          ),
         ],
         onTap: _onTap,
       ),

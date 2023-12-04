@@ -1,4 +1,3 @@
-import 'package:boxing_traning/domain/models/martial_art_model.dart';
 import 'package:boxing_traning/domain/models/martial_template.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -79,7 +79,6 @@ class InProcessTime extends StatelessWidget {
             ],
           ),
           sizedHeight32,
-          sizedHeight32,
         ],
       ),
     );

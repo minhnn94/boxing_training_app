@@ -9,8 +9,8 @@ class DataConstant {
   static const String prepareTime = 'prepareTime';
   static const String totalRounds = 'totalRounds';
 
-  static const String TABLE_PLAN_MANAGE = 'PlanManage';
-  static const String TASK_DONE = 'taskDone';
-  static const String TASK_TOTAL = 'taskTotal';
-  static const String PLANS = 'plans';
+  static const String tableHistory = 'tableHistory';
+  static const String dateTime = 'dateTime';
+  static const String historyId = 'historyId';
+  static const String sportId = 'sportId';
 }

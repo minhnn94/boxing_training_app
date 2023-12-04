@@ -51,7 +51,9 @@
   "round": "Round",
   "confirm": "Confirm",
   "finished": "Finished",
-  "backAndSave": "Back and Save"
+  "backAndSave": "Back and Save",
+  "home": "Home",
+  "history": "History"
 
 
 }

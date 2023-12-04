@@ -73,56 +73,6 @@ class TimingScreen extends StatelessWidget {
                 return const FinishedTimeContent();
               }
             })
-            // Expanded(
-            //   child: Column(
-            //     children: [
-            //       Expanded(
-            //         child: Column(
-            //           children: const [
-            //             SizedBox(
-            //               height: 30,
-            //             ),
-            //             sizedHeight32,
-            //             sizedHeight16,
-            //             RenderTimeComponent(),
-            //             sizedHeight32,
-            //           ],
-            //         ),
-            //       ),
-            //       Row(
-            //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //         children: [
-            //           BlocBuilder<TimingCubit, TimingPlayState>(
-            //             buildWhen: _getButtonBuildWhen,
-            //             builder: (context, state) {
-            //               return TimingProcessButton(
-            //                   onPress: cubit.handleOnPressButtonProcess,
-            //                   icon: Icon(
-            //                     _getIconProcess(state.isPause),
-            //                     size: 60,
-            //                     color: ColorUtils.white,
-            //                   ),
-            //                   centerColor: _getColorProcess(state.isPreparing));
-            //             },
-            //           ),
-            //           TimingProcessButton(
-            //             onPress: cubit.handleOnPressButtonProcess,
-            //             icon: Center(
-            //               child: Container(
-            //                 width: 26,
-            //                 height: 26,
-            //                 color: ColorUtils.white,
-            //               ),
-            //             ),
-            //             centerColor: ColorUtils.recordColor,
-            //           )
-            //         ],
-            //       ),
-            //       sizedHeight32,
-            //       sizedHeight32,
-            //     ],
-            //   ),
-            // ),
           ],
         ),
       ),

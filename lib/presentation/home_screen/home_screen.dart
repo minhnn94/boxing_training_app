@@ -53,13 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 final data = state ?? [];
                 return Expanded(
                   child: ListView.separated(
-                    // gridDelegate:
-                    //     const SliverGridDelegateWithMaxCrossAxisExtent(
-                    //   maxCrossAxisExtent: 200,
-                    //   childAspectRatio: 3 / 2,
-                    //   crossAxisSpacing: 20,
-                    //   mainAxisSpacing: 20,
-                    // ),
+                    physics: const ClampingScrollPhysics(),
                     itemCount: data.length,
                     itemBuilder: (BuildContext ctx, index) {
                       final martialArtModel = data[index];
