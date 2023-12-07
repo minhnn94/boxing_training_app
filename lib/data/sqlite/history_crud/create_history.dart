@@ -3,7 +3,7 @@ import 'package:boxing_traning/data/sqlite/data_helper.dart';
 import 'package:boxing_traning/domain/models/history_model.dart';
 import 'package:sqflite/sqflite.dart';
 
-class CreateSport extends DBHelper {
+class CreateHistory extends DBHelper {
   Database? dbClient;
   Future<void> init() async {
     dbClient = await db;

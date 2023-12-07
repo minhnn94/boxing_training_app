@@ -4,12 +4,16 @@ import 'package:boxing_traning/common/constant/sized_box_constant.dart';
 import 'package:boxing_traning/common/extensions/go_router_extension.dart';
 import 'package:boxing_traning/common/shared_widgets/common_button.dart';
 import 'package:boxing_traning/config/routers/router_name.dart';
+import 'package:boxing_traning/presentation/timing_screen/timing_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FinishedTimeContent extends StatelessWidget {
   const FinishedTimeContent({super.key});
-  void _handleOnPressBackAndSave(BuildContext context) {
-    context.popUntilPath(RouterPath.homeScreen);
+  Future<void> _handleOnPressBackAndSave(BuildContext context) async {
+    await context.read<TimingCubit>().onSaveTraining().then((value) {
+      context.popUntilPath(RouterPath.homeScreen);
+    });
   }
 
   @override

@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:boxing_traning/common/singletons/sound_play.dart';
+import 'package:boxing_traning/data/repository/history_repository.dart';
+import 'package:boxing_traning/domain/models/history_model.dart';
 import 'package:boxing_traning/domain/models/martial_template.dart';
 import 'package:boxing_traning/presentation/timing_screen/states/excercise_status.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +13,16 @@ class TimingCubit extends Cubit<TimingPlayState> {
   TimingCubit(this.martialArt) : super(TimingPlayState()) {
     _initState();
   }
+  final HistoryRepository _repository = HistoryRepositoryImpl();
+  Future<void> onSaveTraining() async {
+    final historyModel = HistoryModel(
+      historyId: DateTime.now().microsecondsSinceEpoch.toString(),
+      dateTime: DateTime.now().microsecondsSinceEpoch,
+      sportId: martialArt.id,
+    );
+    await _repository.createHistory(historyModel);
+  }
+
   void _initState() {
     final roundTime = martialArt.roundTime;
     final breakTime = martialArt.breakTime;

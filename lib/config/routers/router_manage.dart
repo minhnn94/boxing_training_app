@@ -2,6 +2,8 @@ import 'package:boxing_traning/common/global/global_key.dart';
 import 'package:boxing_traning/common/shared_widgets/scafold_with_nav_bar/scafold_with_nav_bar.dart';
 import 'package:boxing_traning/config/routers/router_name.dart';
 import 'package:boxing_traning/domain/models/martial_template.dart';
+import 'package:boxing_traning/presentation/history_screen/history_cubit.dart';
+import 'package:boxing_traning/presentation/history_screen/history_screen.dart';
 import 'package:boxing_traning/presentation/home_screen/home_cubit.dart';
 import 'package:boxing_traning/presentation/home_screen/home_screen.dart';
 import 'package:boxing_traning/presentation/martial_training_detail/martial_training_cubit.dart';
@@ -108,8 +110,11 @@ final GoRouter routerManage = GoRouter(
           // Add this branch routes
           // each routes with its sub routes if available e.g shope/uuid/details
           GoRoute(
-            path: RouterPath.profile,
-            builder: (context, state) => const SplashScreen(),
+            path: RouterPath.history,
+            builder: (context, state) => BlocProvider(
+              create: (context) => HistoryCubit(),
+              child: HistoryScreen(),
+            ),
           ),
         ])
       ],

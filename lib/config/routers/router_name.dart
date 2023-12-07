@@ -4,5 +4,5 @@ class RouterPath {
   static String setupScreen = '/setupScreen';
   static String openCountPackage = '/openCountPackage';
   static String martialDetail = '/martialDetail';
-  static String profile = '/profile';
+  static String history = '/history';
 }

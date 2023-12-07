@@ -51,6 +51,7 @@ dependencies:
   # Run file gen flutter_native_splash
   #Run flutter pub run flutter_native_splash:create
   flutter_native_splash: ^2.2.19
+  grouped_list: ^5.1.2
 
 #  firebase_core: ^2.21.0
 #  cloud_firestore: ^4.12.2
