@@ -14,22 +14,6 @@ class HistoryTemplate {
     this.roundTime,
     this.breakTime,
   }); // HistoryModel({this.historyId, this.sportId, this.dateTime});
-  //
-  // Map<String, dynamic> toJson() {
-  //   return {
-  //     'historyId': historyId ?? '',
-  //     'sportId': sportId ?? '',
-  //     'dateTime': dateTime ?? DateTime.now().microsecondsSinceEpoch,
-  //   };
-  // }
-  //
-  // static HistoryModel fromJson(Map<String, dynamic> map) {
-  //   return HistoryModel(
-  //     historyId: map['historyId'] as String,
-  //     sportId: map['sportId'] as String,
-  //     dateTime: map['dateTime'] as int,
-  //   );
-  // }
 
   static List<HistoryTemplate> fromJsonList(List<Map<String, dynamic>> data) {
     return data.map((e) => HistoryTemplate.fromJson(e)).toList();
