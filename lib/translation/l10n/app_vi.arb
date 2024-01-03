@@ -1,0 +1,40 @@
+{
+  "helloWorld": "Xin chào thế giới",
+  "competitionTime": "Thời gian đấu",
+  "breakTime": "Thời gian nghỉ",
+  "roundTime": "Thời gian hiệp",
+  "totalRounds": "Tổng số hiệp",
+  "prepareTime": "Thời gian chuẩn bị",
+  "setting": "Cài dặt",
+  "minutes": "Phút",
+  "seconds": "Giây",
+  "done": "Xong",
+  "cancel": "Hủy",
+  "start": "Bắt đầu",
+  "pause": "Tạm dừng",
+  "enterNameOfTheSport": "Nhập tên của môn thể thao",
+  "sportName": "Tên môn thể thao",
+  "createNewSport": "Tạo môn thể thao mới",
+  "doYouWantToDeleteSport": "Bạn có muốn xóa {sport}",
+  "@doYouWantToDeleteSport": {
+    "placeholders": {
+      "sport": {
+        "type": "String",
+        "example": "Bob"
+      }
+    }
+  },
+  "detail": "Chi tiết",
+  "choiceYourSport": "Chọn môn thể thao của bạn",
+  "editSport": "Chỉnh sửa",
+  "createSport": "Tạo môn mới",
+  "resume": "Tiếp tục",
+  "round": "Hiệp",
+  "confirm": "Xác nhận",
+  "finished": "Hoàn thành",
+  "backAndSave": "Thoát và lưu",
+  "backToHome": "Về trang chủ",
+  "home": "Trang chủ",
+  "history": "Lịch sử"
+
+}
