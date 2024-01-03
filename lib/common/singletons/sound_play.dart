@@ -9,23 +9,35 @@ class SoundPlay {
   factory SoundPlay() {
     return _singleton;
   }
-  void playSound() {
-    assetsAudioPlayer.open(
+  Future<void> startBoxingBelt() async {
+    await assetsAudioPlayer.open(
       Audio(MusicPath.boxingBelt),
     );
   }
 
-  void playReminderSound() {
-    assetsAudioPlayer.open(
-      Audio(MusicPath.reminderBell),
+  Future<void> playReminderSound() async {
+    await assetsAudioPlayer.open(
+      Audio(MusicPath.tripleTap),
     );
   }
 
-  void startBoxingBelt() {
-    assetsAudioPlayer.open(
-      Audio(MusicPath.boxingBelt),
+  Future<void> playFinishSound() async {
+    await assetsAudioPlayer.open(
+      Audio(MusicPath.finishTime),
     );
   }
+
+  Future<void> startPrepare() async {
+    await assetsAudioPlayer.open(
+      Audio(MusicPath.startFight),
+    );
+  }
+
+  // void startBoxingBelt() {
+  //   assetsAudioPlayer.open(
+  //     Audio(MusicPath.boxingBelt),
+  //   );
+  // }
 
   SoundPlay._internal();
 }

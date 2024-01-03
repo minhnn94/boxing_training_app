@@ -37,6 +37,7 @@ class DBHelper {
       documentsDirectory = await getApplicationDocumentsDirectory();
       String path = join(documentsDirectory.path, DataConstant.dbName);
       var db = await openDatabase(path, version: 1, onCreate: _onCreate);
+      _addDefaultMMA(db);
       return db;
     } catch (e) {
       kDebugLog('Error $e');
@@ -56,6 +57,19 @@ class DBHelper {
          ${DataConstant.sportId} TEXT, ${DataConstant.dateTime} INTEGER)
         ''');
   }
+
+  void _addDefaultMMA(Database dataBase) {
+    MartialTemplate model = MartialTemplate(
+      id: '1',
+      breakTime: 60,
+      totalRounds: 3,
+      roundTime: 300,
+      prepareTime: 5,
+    );
+    Map<String, dynamic> requestObj = model.toJson();
+    dataBase.insert(DataConstant.tableSport, requestObj);
+  }
+
 
   Future<MartialTemplate> update(MartialTemplate planItem) async {
     var dbClient = await db;

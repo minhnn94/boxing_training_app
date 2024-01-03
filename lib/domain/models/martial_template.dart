@@ -34,4 +34,15 @@ class MartialTemplate extends Equatable {
   static List<MartialTemplate> fromJsonList(List<Map<String, dynamic>> data) {
     return data.map((e) => fromJson(e)).toList();
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'breakTime': breakTime ?? 0,
+      'prepareTime': prepareTime ?? 0,
+      'roundTime': roundTime ?? 0,
+      'totalRounds': totalRounds ?? 0,
+      'name': name ?? '',
+    };
+  }
 }

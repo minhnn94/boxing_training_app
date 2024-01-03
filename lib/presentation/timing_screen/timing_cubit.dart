@@ -11,7 +11,7 @@ part 'timing_state.dart';
 
 class TimingCubit extends Cubit<TimingPlayState> {
   TimingCubit(this.martialArt) : super(TimingPlayState()) {
-    _initState();
+    onInit();
   }
   final HistoryRepository _repository = HistoryRepositoryImpl();
   Future<void> onSaveTraining() async {
@@ -41,7 +41,11 @@ class TimingCubit extends Cubit<TimingPlayState> {
   final MartialTemplate martialArt;
   Timer? _trainingTimer;
   Timer? _restingTimer;
-  void onInit() {}
+  void onInit() {
+    _initState();
+    SoundPlay().startPrepare();
+  }
+
   void onPrepareDone() {
     final currentRound = state.currentRound + 1;
     emit(
@@ -80,8 +84,8 @@ class TimingCubit extends Cubit<TimingPlayState> {
   }
 
 /*   ======================= Running Time ==============================*/
-  void startTime() {
-    SoundPlay().playSound();
+  Future<void> startTime() async {
+    await SoundPlay().startBoxingBelt();
     const oneSec = Duration(seconds: 1);
     _trainingTimer = Timer.periodic(
       oneSec,
@@ -93,37 +97,42 @@ class TimingCubit extends Cubit<TimingPlayState> {
     if (state.roundTime == 0) {
       _handleWhenFinishRound();
     } else {
-      final timing = state.roundTime - 1;
-      if (timing == state.prepareTime) {
-        SoundPlay().playReminderSound();
-      }
-      emit(state.copyWith(
-        roundTime: timing,
-      ));
+      _handleWhenStillTime();
     }
+  }
+
+  void _handleWhenStillTime() {
+    final timing = state.roundTime - 1;
+    if (timing == state.prepareTime) {
+      SoundPlay().playReminderSound();
+    }
+    emit(state.copyWith(roundTime: timing));
   }
 
   void _handleWhenFinishRound() {
     _trainingTimer?.cancel();
     if (state.currentRound < state.roundTotal) {
-      final restingTime = martialArt.breakTime;
-      emit(state.copyWith(
-        breakTime: restingTime,
-        // currentRound: currentRound,
-        isRunning: false,
-      ));
-      startToRest();
+      _handleWhenStillRound();
     } else {
       emit(state.copyWith(isFinished: true));
     }
   }
+
+  void _handleWhenStillRound() {
+    final restingTime = martialArt.breakTime;
+    emit(state.copyWith(
+      breakTime: restingTime,
+      isRunning: false,
+    ));
+    startToRest();
+  }
 /*   ======================= Resting Time ==============================*/
 
-  void startToRest() {
+  Future<void> startToRest() async {
     if (state.currentRound >= state.roundTotal) {
       return;
     }
-    SoundPlay().playSound();
+    await SoundPlay().playFinishSound();
     const oneSec = Duration(seconds: 1);
     _restingTimer = Timer.periodic(
       oneSec,

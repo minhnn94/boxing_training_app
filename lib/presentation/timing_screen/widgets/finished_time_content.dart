@@ -50,7 +50,7 @@ class FinishedTimeContent extends StatelessWidget {
             ),
           ),
           CommonButton(
-            title: localLanguage.backAndSave,
+            title: localLanguage.backToHome,
             onPress: () => _handleOnPressBackAndSave(context),
           ),
           sizedHeight16,

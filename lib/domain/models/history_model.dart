@@ -15,9 +15,9 @@ class HistoryModel {
 
   factory HistoryModel.fromJson(Map<String, dynamic> map) {
     return HistoryModel(
-      historyId: map['historyId'] as String,
-      sportId: map['sportId'] as String,
-      dateTime: map['dateTime'] as int,
+      historyId: map['historyId'] as String?,
+      sportId: map['sportId'] as String?,
+      dateTime: map['dateTime'] as int?,
     );
   }
 }

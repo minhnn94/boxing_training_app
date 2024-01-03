@@ -1,4 +1,4 @@
-import 'package:boxing_traning/common/app_localization_utils.dart';
+import 'package:boxing_traning/common/app_gen.dart';
 import 'package:boxing_traning/common/constant/sized_box_constant.dart';
 import 'package:boxing_traning/common/shared_widgets/appbar_common.dart';
 import 'package:boxing_traning/common/shared_widgets/base_scaffold.dart';
@@ -21,7 +21,7 @@ class HistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseScaffold(
         appBar: AppBarCommon(
-          title: AppLocalizationUtils.instance().history,
+          title: AppLocalizations.of(context)?.history ?? '',
         ),
         body: Column(
           children: [
@@ -30,17 +30,6 @@ class HistoryScreen extends StatelessWidget {
               builder: (context, state) {
                 if (state is HistoryLoadingSuccess) {
                   return Expanded(
-                    //   child: ListView.separated(
-                    //     itemBuilder: (_, index) {
-                    //       final item = state.data[index];
-                    //       return HistoryItem(
-                    //         item: item,
-                    //       );
-                    //     },
-                    //     separatorBuilder: (_, __) => sizedHeight08,
-                    //     itemCount: state.data.length,
-                    //   ),
-
                     child: GroupedListView(
                       floatingHeader: true,
                       elements: state.data,

@@ -14,6 +14,7 @@ class CommonButton extends StatelessWidget {
     this.disableBackground,
     this.titleDisableColor,
     this.disable = false,
+    this.titleStyle,
   });
   final Color? backgroundColor;
   final String title;
@@ -22,6 +23,7 @@ class CommonButton extends StatelessWidget {
   final bool disable;
   final Color? disableBackground;
   final Color? titleDisableColor;
+  final TextStyle? titleStyle;
   void _handleOnPress() {
     if (disable) {
       return;
@@ -54,8 +56,9 @@ class CommonButton extends StatelessWidget {
             Text(
               title,
               textAlign: TextAlign.center,
-              style: TextStyleUtils.text16Weight600
-                  .copyWith(color: ColorUtils.white),
+              style: titleStyle ??
+                  TextStyleUtils.text16Weight600
+                      .copyWith(color: ColorUtils.white),
             ),
       ),
     );

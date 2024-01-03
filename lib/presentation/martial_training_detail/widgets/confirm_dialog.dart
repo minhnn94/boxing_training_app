@@ -20,6 +20,7 @@ class ConfirmDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final translation = AppLocalizationUtils.instance();
     return AlertDialog(
+      backgroundColor: ColorUtils.backgroundColor,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10.0))),
       content: Builder(
@@ -36,7 +37,7 @@ class ConfirmDialog extends StatelessWidget {
                     Text(
                       translation.doYouWantToDeleteSport(martial.name ?? ''),
                       style: TextStyleUtils.text16Weight600
-                          .copyWith(color: ColorUtils.black),
+                          .copyWith(color: ColorUtils.white),
                     ),
                     const Divider(),
                     SizedBox(
@@ -48,6 +49,8 @@ class ConfirmDialog extends StatelessWidget {
                               child: CommonButton(
                             backgroundColor: ColorUtils.grey200,
                             title: AppLocalizationUtils.instance().cancel,
+                            titleStyle: TextStyleUtils.text16Weight600
+                                .copyWith(color: ColorUtils.black),
                             onPress: () {
                               context.pop();
                             },
